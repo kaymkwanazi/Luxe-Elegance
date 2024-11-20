@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import Modal from 'react-modal';
 
-export const SignIn = () => {
+Modal.setAppElement('#root'); // Set the root element for accessibility
+
+export const SignIn = ({ modalIsOpen, onCloseModal }) => {
   const [isRegistered, setIsRegistered] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,6 +19,7 @@ export const SignIn = () => {
     const data = await response.json();
     if (data.token) {
       localStorage.setItem('token', data.token);
+      onCloseModal(); // Close the modal on successful sign-in
     }
   };
 
@@ -33,7 +37,11 @@ export const SignIn = () => {
   };
 
   return (
-    <div>
+    <Modal
+      isOpen={modalIsOpen}
+      onRequestClose={onCloseModal}
+      contentLabel="Sign In / Register"
+    >
       {isRegistered ? (
         <form onSubmit={handleSignIn}>
           <h2>Sign In</h2>
@@ -98,6 +106,6 @@ export const SignIn = () => {
           </p>
         </form>
       )}
-    </div>
+    </Modal>
   );
 };
