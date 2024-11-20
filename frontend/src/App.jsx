@@ -1,11 +1,13 @@
-import React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, BrowserRouter, Routes } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
-import { Home } from './pages/Home';
 import { SignIn } from './components/SignIn';
+import { Home } from './pages/Home';
 
 const App = () => {
-  const [modalIsOpen, setModalIsOpen] = React.useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
 
   const handleSignInClick = () => {
     setModalIsOpen(true);
@@ -15,17 +17,23 @@ const App = () => {
     setModalIsOpen(false);
   };
 
+  const handleSignIn = (userData) => {
+    setIsAuthenticated(true);
+    setUser(userData);
+    setModalIsOpen(false);
+  };
+
   return (
-    <>
-      <BrowserRouter>
-        <Navbar onSignInClick={handleSignInClick} />
-        <SignIn modalIsOpen={modalIsOpen} onCloseModal={handleCloseModal} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>      
-      </BrowserRouter>
-    </>
-  )
-}
+    <BrowserRouter>
+    <Navbar onSignInClick={handleSignInClick} isAuthenticated={isAuthenticated} user={user} />
+    <SignIn modalIsOpen={modalIsOpen} onCloseModal={handleCloseModal} onSignIn={handleSignIn} />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        {/* <Route path='/' element={<Home />} />
+        <Route path='/' element={<Home />} /> */}
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
 export default App;

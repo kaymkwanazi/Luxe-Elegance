@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 
 Modal.setAppElement('#root'); // Set the root element for accessibility
 
-export const SignIn = ({ modalIsOpen, onCloseModal }) => {
+export const SignIn = ({ modalIsOpen, onCloseModal, onSignIn }) => {
   const [isRegistered, setIsRegistered] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,7 +19,9 @@ export const SignIn = ({ modalIsOpen, onCloseModal }) => {
     const data = await response.json();
     if (data.token) {
       localStorage.setItem('token', data.token);
-      onCloseModal(); // Close the modal on successful sign-in
+      onSignIn(data.user); // Pass user data to the parent component
+    } else {
+      // Handle sign-in error (e.g., show an error message)
     }
   };
 
@@ -33,6 +35,8 @@ export const SignIn = ({ modalIsOpen, onCloseModal }) => {
     const data = await response.json();
     if (data.success) {
       setIsRegistered(true);
+    } else {
+      
     }
   };
 
@@ -44,7 +48,7 @@ export const SignIn = ({ modalIsOpen, onCloseModal }) => {
     >
       {isRegistered ? (
         <form onSubmit={handleSignIn}>
-          <h2>Sign In</h2>
+          <h2 className='text-2xl'>Sign In</h2>
           <div>
             <label>Email:</label>
             <input

@@ -3,7 +3,7 @@ import { GiDogHouse } from 'react-icons/gi';
 import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
-export const Navbar = ({ onSignInClick }) => {
+export const Navbar = ({ onSignInClick, isAuthenticated, user }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -39,11 +39,17 @@ export const Navbar = ({ onSignInClick }) => {
           <li className='block mt-4 lg:mt-0 text-black hover:text-green-500'>
             <a href="/contact">Contact Us</a>
           </li>
-          <li className='block mt-4 lg:mt-0'>
-            <button onClick={onSignInClick} className='py-2 px-4 bg-green-500 text-white rounded-md'>
-              Sign In
-            </button>
-          </li>
+          {isAuthenticated ? (
+            <li className='block mt-4 lg:mt-0 text-black'>
+              <span>Welcome, {user.name}</span>
+            </li>
+          ) : (
+            <li className='block mt-4 lg:mt-0'>
+              <button onClick={onSignInClick} className='py-2 px-4 bg-green-500 text-white rounded-md'>
+                Sign In
+              </button>
+            </li>
+          )}
         </ul>
       </div>
     </nav>
