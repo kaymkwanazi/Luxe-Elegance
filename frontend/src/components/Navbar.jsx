@@ -16,7 +16,9 @@ export const Navbar = () => {
                 <a href="/products" className='hover:text-green-500'>Contact Us</a>
             </li>
         </ul>
-        <button className='bg-green-500 hover:bg-green-700 text-white font-bold px-4 rounded'>Sign In</button>
+        <Link to='/signin'>
+          <button className='bg-green-500 hover:bg-green-700 text-white font-bold px-4 py-2 rounded'>Sign In</button>
+        </Link>
     </nav>
   )
 }
