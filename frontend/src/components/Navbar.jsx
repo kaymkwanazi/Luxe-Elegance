@@ -11,41 +11,38 @@ export const Navbar = ({ onSignInClick, isAuthenticated, user }) => {
   };
 
   return (
-    <nav className='flex items-center justify-between flex-wrap bg-slate-300 p-5'>
+    <nav className='flex items-center justify-between flex-wrap bg-[#4A4A4A] p-5 border-b border-[#f2b543]'>
       <div className='flex items-center flex-shrink-0 text-white mr-6'>
         <Link to='/'>
-          <h1 className='text-2xl text-black'>PET SHOP</h1>
+          <h1 className='text-2xl'>Jewels</h1>
         </Link>
       </div>
       <div className='block lg:hidden'>
         <button
           onClick={toggleMenu}
-          className='flex items-center px-3 py-2 border rounded text-black border-black hover:text-green-500 hover:border-green-500'
+          className='flex items-center px-3 py-2 border rounded'
         >
-          {isOpen ? <FaTimes /> : <FaBars />}
+          {isOpen ? <FaTimes className='text-white' /> : <FaBars className='text-white'/>}
         </button>
       </div>
       <div className={`w-full block flex-grow lg:flex lg:items-center lg:w-auto ${isOpen ? '' : 'hidden'}`}>
         <ul className='lg:flex lg:justify-center lg:items-center lg:space-x-4 w-full'>
-          <li className='block mt-4 lg:mt-0 text-black hover:text-green-500'>
+          <li className='block mt-4 lg:mt-0 text-white'>
             <a href="/">Home</a>
           </li>
-          <li className='block mt-4 lg:mt-0 text-black hover:text-green-500'>
-            <a href="/about">About Us</a>
-          </li>
-          <li className='block mt-4 lg:mt-0 text-black hover:text-green-500'>
+          <li className='block mt-4 lg:mt-0 text-white'>
             <a href="/products">Products</a>
           </li>
-          <li className='block mt-4 lg:mt-0 text-black hover:text-green-500'>
+          {/* <li className='block mt-4 lg:mt-0 text-black hover:text-green-500'>
             <a href="/contact">Contact Us</a>
-          </li>
+          </li> */}
           {isAuthenticated ? (
             <li className='block mt-4 lg:mt-0 text-black'>
               <span>Welcome, {user.name}</span>
             </li>
           ) : (
             <li className='block mt-4 lg:mt-0'>
-              <button onClick={onSignInClick} className='py-2 px-4 bg-green-500 text-white rounded-md'>
+              <button onClick={onSignInClick} className='border px-2 py-2 text-white rounded-md'>
                 Sign In
               </button>
             </li>
