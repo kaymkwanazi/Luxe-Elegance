@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import signinPic from '../images/Jewellery shop.png'
 import registerPic from '../images/Sign up-pana.png'
+import { useDispatch } from 'react-redux';
+import { registerSuccess } from '../slices/authSlice';
 
 Modal.setAppElement('#root'); // Set the root element for accessibility
 
-export const SignIn = ({ modalIsOpen, onCloseModal, onSignIn }) => {
-  const [isRegistered, setIsRegistered] = useState(true);
+export const SignIn = ({ modalIsOpen, onCloseModal}) => {
+  const [isRegistered, setIsRegistered] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const dispatch = useDispatch();
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -36,6 +39,7 @@ export const SignIn = ({ modalIsOpen, onCloseModal, onSignIn }) => {
     });
     const data = await response.json();
     if (data.success) {
+      dispatch(registerSuccess({ token: data.token, user: data.user }));
       setIsRegistered(true);
     } else {
       alert('Registration failed');

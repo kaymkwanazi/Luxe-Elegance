@@ -1,7 +1,17 @@
-import React from 'react'
+import React from 'react';
+import { FaFacebook, FaFacebookF, FaInstagram, FaInstagramSquare, FaLinkedin, FaLinkedinIn, FaPinterest, FaPinterestP, FaWhatsapp, FaYoutube } from 'react-icons/fa';
 
 export const Footer = () => {
   return (
-    <div>Footer</div>
-  )
-}
+    <div className='fixed md:px-10 right-0 top-1/2 w-16 h-auto transform -translate-y-1/2  flex flex-col justify-end items-center'>
+      <div className='gap-10 flex flex-col items-center md:mr-10'>
+          <hr className='border-t border-[#f2b543] w-32 transform rotate-90 mb-16 mt-10' />
+          <FaFacebookF size={32} className='text-slate-500 ' />
+          <FaPinterestP size={32} className='text-slate-500 '/>
+          <FaInstagram size={32} className='text-slate-500 '/>
+          <FaLinkedinIn size={32} className='text-slate-500 '/>
+          <hr className='border-t border-[#f2b543] w-32 transform rotate-90 mt-16' />
+      </div>
+    </div>
+  );
+};

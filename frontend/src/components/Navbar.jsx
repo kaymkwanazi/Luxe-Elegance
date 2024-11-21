@@ -43,7 +43,7 @@ export const Navbar = ({ onSignInClick, isAuthenticated, user }) => {
           ) : (
             <li className='block mt-4 lg:mt-0'>
               <button onClick={onSignInClick} className='border px-2 py-2 text-white rounded-md'>
-                Sign In
+                Sign Up
               </button>
             </li>
           )}

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, BrowserRouter, Routes } from 'react-rou
 import { Navbar } from './components/Navbar';
 import { SignIn } from './components/SignIn';
 import { Home } from './pages/Home';
+import { Footer } from './components/Footer';
 
 const App = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -32,6 +33,7 @@ const App = () => {
         {/* <Route path='/' element={<Home />} />
         <Route path='/' element={<Home />} /> */}
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };
