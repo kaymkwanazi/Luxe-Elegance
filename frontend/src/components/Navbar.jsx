@@ -54,4 +54,3 @@ export const Navbar = ({ onSignInClick }) => {
     </nav>
   );
 };
-export default Navbar;
