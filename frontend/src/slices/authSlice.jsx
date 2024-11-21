@@ -1,7 +1,6 @@
-// src/redux/authSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
-export const authSlice = createSlice({
+const authSlice = createSlice({
   name: 'auth',
   initialState: {
     isAuthenticated: false,

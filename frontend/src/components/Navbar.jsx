@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { GiDogHouse } from 'react-icons/gi';
 import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 
-export const Navbar = ({ onSignInClick, isAuthenticated, user }) => {
+export const Navbar = ({ onSignInClick }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const {user, isAuthenticated} = useSelector((state) => state.auth);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -38,7 +40,7 @@ export const Navbar = ({ onSignInClick, isAuthenticated, user }) => {
           </li> */}
           {isAuthenticated ? (
             <li className='block mt-4 lg:mt-0 text-black'>
-              <span>Welcome, {user.name}</span>
+              <span>Welcome, {user ? user.name : 'User'}</span>
             </li>
           ) : (
             <li className='block mt-4 lg:mt-0'>
@@ -52,3 +54,4 @@ export const Navbar = ({ onSignInClick, isAuthenticated, user }) => {
     </nav>
   );
 };
+export default Navbar;

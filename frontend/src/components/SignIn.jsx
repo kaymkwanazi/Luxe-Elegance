@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import signinPic from '../images/Jewellery shop.png'
-import registerPic from '../images/Sign up-pana.png'
+import signinPic from '../images/Jewellery shop.png';
+import registerPic from '../images/Sign up-pana.png';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom'; 
 import { registerSuccess } from '../slices/authSlice';
-import useHistory from 'react-router-dom';
 
  Modal.setAppElement('#root'); 
 
@@ -14,7 +14,7 @@ export const SignIn = ({ modalIsOpen, onCloseModal, onSignIn }) => {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -23,13 +23,13 @@ export const SignIn = ({ modalIsOpen, onCloseModal, onSignIn }) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
-        credentials: 'include', 
+        credentials: 'include', // Ensure cookies are included
       });
       const data = await response.json();
       if (response.ok) {
         localStorage.setItem('token', data.token);
-        onSignIn(data.user); 
-        history.push('/'); //Redirect to Home page
+        onSignIn(data); // Pass user data to the parent component
+        navigate('/'); // Redirect to home page
       } else {
         alert(data.message || 'Invalid email or password');
       }
@@ -49,7 +49,7 @@ export const SignIn = ({ modalIsOpen, onCloseModal, onSignIn }) => {
           'Accept': 'application/json',
         },
         body: JSON.stringify({ name, email, password }),
-        credentials: 'include', 
+        credentials: 'include', // Ensure cookies are included
       });
       const data = await response.json();
       if (response.ok) {

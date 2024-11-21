@@ -3,18 +3,24 @@ import User from '../models/userModel.js';
 import generateToken from '../utils/generateToken.js';
 import { json } from 'express';
 
-//Authenticate users
+//Authenticate user and get token
 const authUser = asyncHandler(async (req, res) => {
-   const { email, password } = req.body;
+  const { email, password } = req.body;
 
-   const user = await User.findOne({ email });
+  const user = await User.findOne({ email });
 
-   if (user && (await user.matchPassword(password))) {
-    generateToken(res, user._id);
-    res.status(201).json({
+  if (user && (await user.matchPassword(password))) {
+    res.cookie('token', generateToken(user._id), {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+    });
+    res.json({
       _id: user._id,
       name: user.name,
       email: user.email,
+      isAdmin: user.isAdmin,
+      token: generateToken(user._id),
     });
   } else {
     res.status(401);

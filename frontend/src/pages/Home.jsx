@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 export const Home = () => {
   return (
     <>
-      <div className='h-screen w-10/12 md:w-11/12 bg-cover bg-center relative flex flex-col items-center justify-center' 
+      <div className='h-screen w-11/12 bg-cover bg-center relative flex flex-col items-center justify-center' 
         style={{backgroundImage: `url(${pic1})`}}>
             <div className='absolute bg-black bg-opacity-40 inset-0'></div>
             <div className='relative text-white text-center'>
