@@ -5,9 +5,9 @@ import registerPic from '../images/Sign up-pana.png'
 import { useDispatch } from 'react-redux';
 import { registerSuccess } from '../slices/authSlice';
 
-Modal.setAppElement('#root'); // Set the root element for accessibility
+ Modal.setAppElement('#root'); // Set the root element for accessibility
 
-export const SignIn = ({ modalIsOpen, onCloseModal}) => {
+export const SignIn = ({ modalIsOpen, onCloseModal, onSignIn }) => {
   const [isRegistered, setIsRegistered] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,32 +16,47 @@ export const SignIn = ({ modalIsOpen, onCloseModal}) => {
 
   const handleSignIn = async (e) => {
     e.preventDefault();
-    const response = await fetch('/api/signin', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await response.json();
-    if (data.token) {
-      localStorage.setItem('token', data.token);
-      onSignIn(data.user); // Pass user data to the parent component
-    } else {
-      alert('Invalid email or password');
+    try {
+      const response = await fetch('http://localhost:5000/api/users/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+        credentials: 'include', // Ensure cookies are included
+      });
+      const data = await response.json();
+      if (response.ok) {
+        localStorage.setItem('token', data.token);
+        onSignIn(data.user); // Pass user data to the parent component
+      } else {
+        alert(data.message || 'Invalid email or password');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Sign-in failed');
     }
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    const response = await fetch('/api/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, password }),
-    });
-    const data = await response.json();
-    if (data.success) {
-      dispatch(registerSuccess({ token: data.token, user: data.user }));
-      setIsRegistered(true);
-    } else {
+    try {
+      const response = await fetch('http://localhost:5000/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({ name, email, password }),
+        credentials: 'include', // Ensure cookies are included
+      });
+      const data = await response.json();
+      if (response.ok) {
+        dispatch(registerSuccess({ token: data.token, user: data.user }));
+        setIsRegistered(true);
+      } else {
+        alert(data.message || 'Registration failed');
+      }
+    } catch (error) {
+      console.error('Error:', error);
       alert('Registration failed');
     }
   };
