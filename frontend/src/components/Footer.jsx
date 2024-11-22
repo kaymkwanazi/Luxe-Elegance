@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaFacebook, FaFacebookF, FaInstagram, FaInstagramSquare, FaLinkedin, FaLinkedinIn, FaPinterest, FaPinterestP, FaWhatsapp, FaYoutube } from 'react-icons/fa';
 
-export const Footer = () => {
+const Footer = () => {
   return (
     <div className='fixed md:px-10 right-0 top-1/2 w-16 h-auto transform -translate-y-1/2  flex flex-col justify-end items-center'>
       <div className='gap-10 flex flex-col items-center md:mr-10'>
@@ -15,3 +15,5 @@ export const Footer = () => {
     </div>
   );
 };
+
+export default Footer;

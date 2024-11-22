@@ -3,7 +3,7 @@ import pic1 from '../images/hand with gold ring.jpg'
 import aboutPic from '../images/aboutPic.jpg'
 import { Link } from 'react-router-dom'
 
-export const Home = () => {
+const Home = () => {
   return (
     <>
       <div className='h-screen w-11/12 bg-cover bg-center relative flex flex-col items-center justify-center' 
@@ -24,4 +24,6 @@ export const Home = () => {
       </div>
     </>
   )
-}
+};
+
+export default Home;  

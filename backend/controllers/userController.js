@@ -82,12 +82,22 @@ const logoutUser = asyncHandler(async (req, res) => {
 
 // Get user profile
 const getUserProfile = asyncHandler(async (req, res) => {
-  const user = {
-    _id: req.user._id,
-    name: req.user.name,
-    email: req.user.email,
-  };
-  res.status(200).json(user);
+  console.log("🚀 ~ getUserProfile ~ req", req)
+  console.log("🚀 ~ getUserProfile ~ req.user", req.user)
+
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    });
+  } else {
+    res.status(404);
+    throw new Error('User not found');
+  }
 });
 
 // Update profile

@@ -3,29 +3,24 @@ import asyncHandler from 'express-async-handler';
 import User from '../models/userModel.js';
 
 const protect = asyncHandler(async (req, res, next) => {
-  const token = req.cookies.jwt;
+  let token;
 
-  if (!token) {
-    console.log('No token found');
-    return res.status(401).json({ message: 'No token, authorization denied' });
-  }
-
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log('Token decoded:', decoded);
-
-    req.user = await User.findById(decoded.userId).select('-password');
-    if (!req.user) {
-      console.log('User not found');
-      return res.status(401).json({ message: 'User not found' });
+  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    try {
+      token = req.headers.authorization.split(' ')[1];
+      console.log('Token:', token);
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      console.log('Decoded token:', decoded);
+      req.user = await User.findById(decoded.id).select('-password');
+      next();
+    } catch (error) {
+      console.error('Token verification failed:', error);
+      res.status(401);
+      throw new Error('Not authorized, token failed');
     }
-    
-    console.log('User authenticated:', req.user);
-    next();
-  } catch (error) {
-    console.log('Token is not valid', error);
+  } else {
     res.status(401);
-    throw new Error('Not authorized, token invalid');
+    throw new Error('Not authorized, no token');
   }
 });
 

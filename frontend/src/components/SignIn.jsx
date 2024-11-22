@@ -8,7 +8,7 @@ import { registerSuccess } from '../slices/authSlice';
 
  Modal.setAppElement('#root'); 
 
-export const SignIn = ({ modalIsOpen, onCloseModal, onSignIn }) => {
+const SignIn = ({ modalIsOpen, onCloseModal, onSignIn }) => {
   const [isRegistered, setIsRegistered] = useState(false);
   const [email, setEmail] = useState('');
   console.log("🚀 ~ SignIn ~ email:", email)
@@ -160,3 +160,5 @@ export const SignIn = ({ modalIsOpen, onCloseModal, onSignIn }) => {
     </Modal>
   );
 };
+
+export default SignIn;
