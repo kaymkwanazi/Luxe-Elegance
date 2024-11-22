@@ -2,6 +2,7 @@ import React from 'react'
 import pic1 from '../images/hand with gold ring.jpg'
 import aboutPic from '../images/aboutPic.jpg'
 import { Link } from 'react-router-dom'
+import { Products } from './Products';
 
 const Home = () => {
   return (
@@ -17,11 +18,7 @@ const Home = () => {
                 </Link>
             </div>
       </div>
-      <div className='container mx-auto px-4'>
-        <div className='grid grid-cols-1 md:grid-cols-2'>
-            
-        </div>
-      </div>
+      
     </>
   )
 };
