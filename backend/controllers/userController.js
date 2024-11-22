@@ -82,8 +82,8 @@ const logoutUser = asyncHandler(async (req, res) => {
 
 // Get user profile
 const getUserProfile = asyncHandler(async (req, res) => {
-  console.log("🚀 ~ getUserProfile ~ req", req)
-  console.log("🚀 ~ getUserProfile ~ req.user", req.user)
+  // console.log("🚀 ~ getUserProfile ~ req", req)
+  console.log("🚀 ~ getUserProfile ~ req.user", req)
 
   const user = await User.findById(req.user._id);
 

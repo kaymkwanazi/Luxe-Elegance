@@ -7,6 +7,7 @@ import Profile from './pages/Profile';
 import { Settings } from './pages/Settings';
 import Logout from './components/Logout';
 import Footer from './components/Footer';
+import { Products } from './pages/Products';
 
 const App = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -41,6 +42,7 @@ const App = () => {
         <Route path='/profile' element={<Profile user={user} />} />
         <Route path='/settings' element={<Settings />} />
         <Route path='/logout' element={<Logout onSignOut={handleSignOut} />} />
+        <Route path='/products' element={<Products />} />
       </Routes>
       <Footer />
     </Router>

@@ -9,16 +9,18 @@ const Profile = ({ user }) => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
+        console.log('Fetching profile for user:', user);
         const config = {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
         };
         const { data } = await axios.get('/api/users/profile', config);
-        console.log(data)
+        console.log('Profile data:', data);
         setProfile(data);
         setLoading(false);
       } catch (error) {
+        console.error('Error fetching profile:', error);
         setError('Error fetching profile');
         setLoading(false);
       }
