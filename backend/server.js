@@ -6,10 +6,11 @@ import userRoutes from './routes/userRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import connectDB from './config/db.js';
 
-dotenv.config();
-const port = process.env.PORT || 5000;
+dotenv.config(); //Load environment from .env files
 
-connectDB();
+const port = process.env.PORT || 5000; //Access port from .env file or use 5000 as default
+
+connectDB(); //Connect to database
 const app = express();
 
 app.use(express.json());
