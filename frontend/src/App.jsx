@@ -13,6 +13,7 @@ const App = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
+  const [isPopUpVisible, setIsPopUpVisible] = useState(false);
 
   const handleSignInClick = () => {
     setModalIsOpen(true);
@@ -33,9 +34,24 @@ const App = () => {
     setUser(null);
   };
 
+  const togglePopUp = () => {
+    setIsPopUpVisible(!isPopUpVisible);
+  };
+
+  const handleItemClick = () => {
+    setIsPopUpVisible(false);
+  };
+
   return (
     <Router>
-      <Navbar onSignInClick={handleSignInClick} isAuthenticated={isAuthenticated} user={user} />
+      <Navbar 
+        onSignInClick={handleSignInClick} 
+        isAuthenticated={isAuthenticated} 
+        user={user} 
+        isPopUpVisible={isPopUpVisible}
+        togglePopUp={togglePopUp}
+        handleItemClick={handleItemClick}
+      />
       <SignIn modalIsOpen={modalIsOpen} onCloseModal={handleCloseModal} onSignIn={handleSignIn} />
       <Routes>
         <Route path='/' element={<Home />} />
