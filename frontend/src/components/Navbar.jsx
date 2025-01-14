@@ -37,6 +37,7 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
               <Link to="/products">Products</Link>
             </li>
             {isAuthenticated ? (
+              <>
               <li className="relative block mt-4 lg:mt-0 text-white">
                 <button
                   onClick={togglePopUp}
@@ -52,6 +53,18 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
                   </div>
                 )}
               </li>
+              {/* Button For adding products */}
+              {user.isAdmin && (
+                <li className="relative block mt-4 lg:mt-0 text-white">
+                  <button
+                    className="flex items-center px-3 py-2 rounded-md text-sm font-medium focus:outline-none"
+                  >
+                    Add Product
+                  </button>
+                  
+                </li>
+              )}
+              </>
             ) : (
               <li className="block mt-4 lg:mt-0">
                 <button onClick={onSignInClick} className="border px-2 py-2 text-white rounded-md">
