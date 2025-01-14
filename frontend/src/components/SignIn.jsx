@@ -17,6 +17,7 @@ const SignIn = ({ modalIsOpen, onCloseModal, onSignIn }) => {
   const [name, setName] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -44,13 +45,13 @@ const SignIn = ({ modalIsOpen, onCloseModal, onSignIn }) => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/users', {
+      const response = await fetch('http://localhost:5000/api/users/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ name, email, password, isAdmin }),
         credentials: 'include', // Ensure cookies are included
       });
       const data = await response.json();
@@ -145,6 +146,13 @@ const SignIn = ({ modalIsOpen, onCloseModal, onSignIn }) => {
               required
               className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
             />
+            <label>
+              <input type="checkbox" className='mt-4 mr-2' 
+              checked = {isAdmin}
+              onChange={(e) => setIsAdmin(e.target.checked)}
+              />
+              Admin
+            </label>
           </div>
           <button type="submit" className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded focus:outline-none focus:shadow-outlinee'>Register</button>
           <p className='mt-2'>

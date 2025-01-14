@@ -12,6 +12,7 @@ const Profile = ({ user }) => {
         console.log('Fetching profile for user:', user);
         const config = {
           headers: {
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${user.token}`,
           },
         };
