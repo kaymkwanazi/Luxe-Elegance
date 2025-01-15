@@ -5,7 +5,7 @@ import AddProduct from "../components/addProduct";
 const Product = ({ product }) => (
   <div key={product._id}>
     <h2>{product.name}</h2>
-    <img src={product.image} alt={product.name} />
+    <img src={product.image} alt={product.name}  />
     <p>{product.description}</p>
     <p>${product.price}</p>
   </div>
@@ -15,7 +15,7 @@ export const Products = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -55,10 +55,16 @@ export const Products = () => {
 
   return (
     <>
-      <div className="bg-[#494949] w-11/12 h-screen text-white">
+       <div className="bg-[#494949] w-11/12 text-white">
         <h1 className="font-bod text-4xl text-center pt-10">
           Browse through our beautiful collection
         </h1>
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="mt-4 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-700"
+        >
+          Add Product
+        </button>
         <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-5 mt-10 pb-10">
           {currentItems.map((product) => (
             <div
@@ -68,10 +74,10 @@ export const Products = () => {
               <img
                 src={product.image}
                 alt={product.name}
-                className="object-cover transform transition duration-300 hover:scale-110"
+                className="object-cover w-52 h-52 transform transition duration-300 hover:scale-110"
               />
-              <h4 className="text-xl font-bold mt-10 m-2">{product.name}</h4>
-              <h4 className="text-sm m-2">{product.description}</h4>
+              <h4 className="text-lg font-bold mt-10 m-2">{product.name}</h4>
+              
               <p className="m-4">R{product.price}</p>
             </div>
           ))}
@@ -88,6 +94,9 @@ export const Products = () => {
           ))}
         </div>
       </div>
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <AddProduct />
+      </Modal>
     </>
   );
 };
