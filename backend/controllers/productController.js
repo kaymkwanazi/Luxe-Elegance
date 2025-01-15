@@ -27,16 +27,14 @@ const getProductById = asyncHandler(async (req, res) => {
 // @route   POST /api/products
 // @access  Private/Admin
 const createProduct = asyncHandler(async (req, res) => {
-  const { name, price, description, image, brand, category, countInStock } = req.body;
+  const { name, price, description, image, category } = req.body;
 
   const product = new Product({
     name,
     price,
     description,
     image,
-    brand,
     category,
-    countInStock,
     user: req.user._id, // Assuming you want to track which admin created the product
   });
 

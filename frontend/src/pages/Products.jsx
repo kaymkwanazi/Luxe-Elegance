@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
+import Modal from "../components/Modal";
+import AddProduct from "../components/addProduct";
 
 const Product = ({ product }) => (
   <div key={product._id}>
     <h2>{product.name}</h2>
     <img src={product.image} alt={product.name} />
+    <p>{product.description}</p>
     <p>${product.price}</p>
   </div>
 );
@@ -12,6 +15,7 @@ export const Products = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -51,7 +55,7 @@ export const Products = () => {
 
   return (
     <>
-      <div className="bg-[#494949] w-11/12 text-white">
+      <div className="bg-[#494949] w-11/12 h-screen text-white">
         <h1 className="font-bod text-4xl text-center pt-10">
           Browse through our beautiful collection
         </h1>
@@ -67,6 +71,7 @@ export const Products = () => {
                 className="object-cover transform transition duration-300 hover:scale-110"
               />
               <h4 className="text-xl font-bold mt-10 m-2">{product.name}</h4>
+              <h4 className="text-sm m-2">{product.description}</h4>
               <p className="m-4">R{product.price}</p>
             </div>
           ))}
@@ -76,7 +81,7 @@ export const Products = () => {
             <button
               key={number}
               onClick={() => setCurrentPage(number)}
-              className="mx-1 px-3 py-1 bg-gray-300 rounded"
+              className="mx-1 px-3 py-1 bg-blue-500 rounded-lg text-white"
             >
               {number}
             </button>

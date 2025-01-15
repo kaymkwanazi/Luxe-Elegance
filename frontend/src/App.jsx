@@ -8,6 +8,7 @@ import { Settings } from './pages/Settings';
 import Logout from './components/Logout';
 import Footer from './components/Footer';
 import { Products } from './pages/Products';
+import AddProduct from './components/addProduct';
 
 const App = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -47,7 +48,7 @@ const App = () => {
       <Navbar 
         onSignInClick={handleSignInClick} 
         isAuthenticated={isAuthenticated} 
-        user={user} 
+        user={{isAdmin:true, user}}
         isPopUpVisible={isPopUpVisible}
         togglePopUp={togglePopUp}
         handleItemClick={handleItemClick}
@@ -59,6 +60,7 @@ const App = () => {
         <Route path='/settings' element={<Settings />} />
         <Route path='/logout' element={<Logout onSignOut={handleSignOut} />} />
         <Route path='/products' element={<Products />} />
+        <Route path='/addProduct' element={<AddProduct />} />
       </Routes>
       <Footer />
     </Router>
