@@ -1,42 +1,16 @@
 import React, { useState, useEffect } from "react";
-import Modal from "../components/Modal";
-import AddProduct from "../components/addProduct";
+import Swal from "sweetalert2";
+import Modal from '../components/Modal';
+import UpdateProduct from '../components/UpdateProduct';
 
-const Product = ({ product }) => (
-  <div key={product._id}>
-    <h2>{product.name}</h2>
-    <img src={product.image} alt={product.name}  />
-    <p>{product.description}</p>
-    <p>${product.price}</p>
-  </div>
-);
 
-export const Products = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+export const Products = ({ products: initialProducts, isAdmin }) => {
+  const [products, setProducts] = useState(initialProducts); 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(6);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch("http://localhost:5000/api/products");
-        if (!response.ok) {
-          throw new Error("Failed to fetch products");
-        }
-        const data = await response.json();
-        setProducts(data);
-        setLoading(false);
-      } catch (error) {
-        setError(error.message);
-        setLoading(false);
-      }
-    };
-    fetchProducts();
-  }, []);
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(14);
   const lastItem = currentPage * itemsPerPage;
   const firstItem = lastItem - itemsPerPage;
   const currentItems = products.slice(firstItem, lastItem);
@@ -45,59 +19,115 @@ export const Products = () => {
     pageNumbers.push(i);
   }
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const handleDelete = (product) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `You are about to delete ${product.name}`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const token = localStorage.getItem('token');
+        fetch(`http://localhost:5000/api/products/${product._id}`, { 
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          setProducts(products.filter(p => p._id !== product._id));
+          Swal.fire(
+            'Deleted!',
+            `${product.name} has been deleted.`,
+            'success'
+          );
+        } else {
+          Swal.fire(
+            'Error!',
+            `There was a problem deleting the product: ${data.message}`,
+            'error'
+          );
+        }
+      })
+      .catch(error => {
+        console.error('Error deleting product:', error);
+        Swal.fire(
+          'Error!',
+          'There was a problem deleting the product.',
+          'error'
+        );
+      });
+      }
+    });
+  };
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  const handleUpdate = (product) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
+  const handleUpdateProduct = (updatedProduct) => {
+    setProducts(products.map(p => p._id === updatedProduct._id ? updatedProduct : p));
+  };
 
   return (
-    <>
-       <div className="bg-[#494949] w-11/12 text-white">
-        <h1 className="font-bod text-4xl text-center pt-10">
-          Browse through our beautiful collection
-        </h1>
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="mt-4 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-700"
-        >
-          Add Product
-        </button>
-        <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-5 mt-10 pb-10">
-          {currentItems.map((product) => (
-            <div
-              key={product._id}
-              className="rounded-lg w-52 shadow-md overflow-hidden cursor-pointer"
-            >
-              <img
-                src={product.image}
-                alt={product.name}
-                className="object-cover w-52 h-52 transform transition duration-300 hover:scale-110"
-              />
-              <h4 className="text-lg font-bold mt-10 m-2">{product.name}</h4>
-              
-              <p className="m-4">R{product.price}</p>
-            </div>
-          ))}
-        </div>
-        <div className="flex justify-center mt-4">
-          {pageNumbers.map((number) => (
-            <button
-              key={number}
-              onClick={() => setCurrentPage(number)}
-              className="mx-1 px-3 py-1 bg-blue-500 rounded-lg text-white"
-            >
-              {number}
-            </button>
-          ))}
-        </div>
+    <div className="bg-[#494949] min-h-screen w-11/12 text-white">
+      <h1 className="font-bod text-4xl text-center pt-10">
+        Browse through our beautiful collection
+      </h1>
+      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-5 mt-10 pb-10">
+        {currentItems.map((product) => (
+          <div
+            key={product._id}
+            className="rounded-lg w-52 shadow-md overflow-hidden cursor-pointer"
+          >
+            <img
+              src={product.image}
+              alt={product.name}
+              className="object-cover w-52 h-52 transform transition duration-300 hover:scale-110"
+            />
+            <h4 className="text-lg font-bold mt-10 m-2">{product.name}</h4>
+            <p className="m-4">R{product.price}</p>
+            {isAdmin && (
+              <div className="flex justify-between m-4">
+                <button
+                  className="bg-red-500 text-white px-4 py-2 rounded"
+                  onClick={() => handleDelete(product)}
+                >
+                  Remove
+                </button>
+                <button
+                  className="bg-blue-500 text-white px-4 py-2 rounded ml-2"
+                  onClick={() => handleUpdate(product)}
+                >
+                  Edit
+                </button>
+              </div>
+            )}
+          </div>
+        ))}
       </div>
+      <div className="flex justify-center mt-4">
+        {pageNumbers.map((number) => (
+          <button
+            key={number}
+            onClick={() => setCurrentPage(number)}
+            className="mx-1 px-3 py-1 mb-5 bg-blue-500 rounded-lg text-white"
+          >
+            {number}
+          </button>
+        ))}
+      </div>
+
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <AddProduct />
+        <UpdateProduct product={selectedProduct} onUpdateProduct={handleUpdateProduct} onClose={() => setIsModalOpen(false)} />
       </Modal>
-    </>
+    </div>
   );
 };
 

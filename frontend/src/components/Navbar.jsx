@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import AddProduct from './addProduct';
+import Modal from './Modal';
 
-const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleItemClick, togglePopUp}) => {
+const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleItemClick, togglePopUp, onAddProductClick }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -12,6 +15,10 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
+  };
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
   };
 
   return (
@@ -56,13 +63,12 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
               {/* Button For adding products */}
               {user.isAdmin && (
                 <li className="relative block mt-4 lg:mt-0 text-white">
-                  <Link to="/addProduct">
                   <button
                     className="flex items-center px-3 py-2 rounded-md focus:outline-none"
+                    onClick={onAddProductClick}
                   >
                     Add Product
                   </button>
-                  </Link>
                 </li>
               )}
               </>
@@ -76,6 +82,10 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
           </ul>
         </div>
       </div>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <AddProduct />
+      </Modal>
       
       {/* {isAuthenticated && <span className='text-white text-center'>Welcome, {user.name}</span>} */}
     </nav>

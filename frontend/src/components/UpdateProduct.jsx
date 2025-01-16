@@ -1,63 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import swal from 'sweetalert';
 
-const AddProduct = ({ newAddProduct, onClose }) => {
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState('');
-  const [image, setImage] = useState('');
-  const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
+const UpdateProduct = ({ product, onUpdateProduct, onClose }) => {
+  const [name, setName] = useState(product.name);
+  const [price, setPrice] = useState(product.price);
+  const [image, setImage] = useState(product.image);
+  const [description, setDescription] = useState(product.description);
+  const [category, setCategory] = useState(product.category);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(name, price, image, description, category);
-
-    setLoading(true); // Start loader
+    setLoading(true);
 
     try {
-      const token = localStorage.getItem('token'); // Retrieve the token from local storage
+      const token = localStorage.getItem('token');
 
-      const response = await fetch("http://localhost:5000/api/products", {
-        method: 'POST',
+      const response = await fetch(`http://localhost:5000/api/products/${product._id}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({ name, price, image, description, category }),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to add product');
+        throw new Error(errorData.message || 'Failed to update product');
       }
 
       const data = await response.json();
-      console.log('Product added:', data);
+      onUpdateProduct(data);
 
-      // Reset fields
-      setName('');
-      setPrice('');
-      setImage('');
-      setDescription('');
-      setCategory('');
-
-      // Add the new product to the list
-      newAddProduct(data);
-
-      // Show success message with countdown
       swal({
         title: "Success",
-        text: "Product added successfully!",
+        text: "Product updated successfully!",
         icon: "success",
         timer: 5000,
         buttons: false,
       }).then(() => {
-        onClose(); // Close the modal after SweetAlert closes
+        onClose();
       });
     } catch (error) {
-      console.error('Error adding product:', error.message);
-      // Show error message with countdown
+      console.error('Error updating product:', error.message);
       swal({
         title: "Error",
         text: error.message,
@@ -65,16 +51,16 @@ const AddProduct = ({ newAddProduct, onClose }) => {
         timer: 5000,
         buttons: false,
       }).then(() => {
-        onClose(); // Close the modal after SweetAlert closes
+        onClose();
       });
     } finally {
-      setLoading(false); // Stop loader
+      setLoading(false);
     }
   };
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold">Add Product</h1>
+      <h1 className="text-2xl font-bold">Update Product</h1>
       <form onSubmit={handleSubmit} className="mt-4 space-y-4">
         <div>
           <label className="block text-sm font-medium">Name</label>
@@ -130,11 +116,11 @@ const AddProduct = ({ newAddProduct, onClose }) => {
           className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700"
           disabled={loading}
         >
-          {loading ? 'Adding...' : 'Add Product'}
+          {loading ? 'Updating...' : 'Update Product'}
         </button>
       </form>
     </div>
   );
 };
 
-export default AddProduct;
+export default UpdateProduct;

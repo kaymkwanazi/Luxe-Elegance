@@ -11,9 +11,7 @@ import { registerSuccess } from '../slices/authSlice';
 const SignIn = ({ modalIsOpen, onCloseModal, onSignIn }) => {
   const [isRegistered, setIsRegistered] = useState(false);
   const [email, setEmail] = useState('');
-  console.log("🚀 ~ SignIn ~ email:", email)
   const [password, setPassword] = useState('');
-  console.log("🚀 ~ SignIn ~ password:", password)
   const [name, setName] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();

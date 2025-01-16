@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import SignIn from './components/SignIn';
@@ -7,14 +7,33 @@ import Profile from './pages/Profile';
 import { Settings } from './pages/Settings';
 import Logout from './components/Logout';
 import Footer from './components/Footer';
-import { Products } from './pages/Products';
+import Products from './pages/Products';
 import AddProduct from './components/addProduct';
+import Modal from './components/Modal';
 
 const App = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const [isPopUpVisible, setIsPopUpVisible] = useState(false);
+  const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/products");
+        if (!response.ok) {
+          throw new Error("Failed to fetch products");
+        }
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   const handleSignInClick = () => {
     setModalIsOpen(true);
@@ -43,6 +62,18 @@ const App = () => {
     setIsPopUpVisible(false);
   };
 
+  const handleAddProductClick = () => {
+    setIsAddProductModalOpen(true);
+  };
+
+  const handleCloseAddProductModal = () => {
+    setIsAddProductModalOpen(false);
+  };
+
+  const newAddProduct = (newProduct) => {
+    setProducts([...products, newProduct]);
+  };
+
   return (
     <Router>
       <Navbar 
@@ -52,6 +83,7 @@ const App = () => {
         isPopUpVisible={isPopUpVisible}
         togglePopUp={togglePopUp}
         handleItemClick={handleItemClick}
+        onAddProductClick={handleAddProductClick}
       />
       <SignIn modalIsOpen={modalIsOpen} onCloseModal={handleCloseModal} onSignIn={handleSignIn} />
       <Routes>
@@ -59,10 +91,13 @@ const App = () => {
         <Route path='/profile' element={<Profile user={user} />} />
         <Route path='/settings' element={<Settings />} />
         <Route path='/logout' element={<Logout onSignOut={handleSignOut} />} />
-        <Route path='/products' element={<Products />} />
-        <Route path='/addProduct' element={<AddProduct />} />
+        <Route path='/products' element={<Products products={products} isAdmin={user?.isAdmin} />} />
+        <Route path='/addProduct' element={<AddProduct newAddProduct={newAddProduct} />} />
       </Routes>
       <Footer />
+      <Modal isOpen={isAddProductModalOpen} onClose={handleCloseAddProductModal}>
+        <AddProduct newAddProduct={newAddProduct} onClose={handleCloseAddProductModal} />
+      </Modal>
     </Router>
   );
 };
