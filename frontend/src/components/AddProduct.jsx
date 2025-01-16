@@ -50,7 +50,7 @@ const AddProduct = ({ newAddProduct, onClose }) => {
         title: "Success",
         text: "Product added successfully!",
         icon: "success",
-        timer: 5000,
+        timer: 2000,
         buttons: false,
       }).then(() => {
         onClose(); // Close the modal after SweetAlert closes
@@ -62,7 +62,7 @@ const AddProduct = ({ newAddProduct, onClose }) => {
         title: "Error",
         text: error.message,
         icon: "error",
-        timer: 5000,
+        timer: 2000,
         buttons: false,
       }).then(() => {
         onClose(); // Close the modal after SweetAlert closes

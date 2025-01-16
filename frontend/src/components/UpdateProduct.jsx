@@ -37,7 +37,7 @@ const UpdateProduct = ({ product, onUpdateProduct, onClose }) => {
         title: "Success",
         text: "Product updated successfully!",
         icon: "success",
-        timer: 5000,
+        timer: 2000,
         buttons: false,
       }).then(() => {
         onClose();
@@ -48,7 +48,7 @@ const UpdateProduct = ({ product, onUpdateProduct, onClose }) => {
         title: "Error",
         text: error.message,
         icon: "error",
-        timer: 5000,
+        timer: 2000,
         buttons: false,
       }).then(() => {
         onClose();
