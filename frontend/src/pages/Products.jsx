@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import Modal from '../components/Modal';
 import UpdateProduct from '../components/UpdateProduct';
+import { MdDelete, MdDeleteOutline } from "react-icons/md";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { MdOutlineModeEdit } from "react-icons/md";
 
 
 export const Products = ({ products: initialProducts, isAdmin }) => {
@@ -99,13 +102,13 @@ export const Products = ({ products: initialProducts, isAdmin }) => {
                   className="bg-red-500 text-white px-4 py-2 rounded"
                   onClick={() => handleDelete(product)}
                 >
-                  Remove
+                  <RiDeleteBin6Line />
                 </button>
                 <button
                   className="bg-blue-500 text-white px-4 py-2 rounded ml-2"
                   onClick={() => handleUpdate(product)}
                 >
-                  Edit
+                  <MdOutlineModeEdit />
                 </button>
               </div>
             )}
