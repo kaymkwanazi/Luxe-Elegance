@@ -79,9 +79,9 @@ export const Products = ({ products: initialProducts, isAdmin }) => {
   };
 
   return (
-    <div className="bg-[#494949] min-h-screen w-11/12 text-white">
+    <div className="bg-[#494949] min-h-screen text-white">
       <h1 className="font-bod text-4xl text-center pt-10">
-        Browse through our beautiful collection
+        Browse Our Exquisite Jewelry Collection
       </h1>
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-5 mt-10 pb-10">
         {currentItems.map((product) => (

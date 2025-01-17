@@ -74,8 +74,8 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
               </>
             ) : (
               <li className="block mt-4 lg:mt-0">
-                <button onClick={onSignInClick} className="border px-2 py-2 text-white rounded-md">
-                  Sign Up
+                <button onClick={onSignInClick} className="border p-2 text-sm text-white rounded-md">
+                  Sign In
                 </button>
               </li>
             )}
@@ -87,7 +87,6 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
         <AddProduct />
       </Modal>
       
-      {/* {isAuthenticated && <span className='text-white text-center'>Welcome, {user.name}</span>} */}
     </nav>
   );
 };
