@@ -4,10 +4,11 @@ import Modal from '../components/Modal';
 import UpdateProduct from '../components/UpdateProduct';
 import { MdDelete, MdDeleteOutline } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { MdOutlineModeEdit } from "react-icons/md";
+import { MdOutlineModeEdit , MdOutlineAddShoppingCart} from "react-icons/md";
 
 
-export const Products = ({ products: initialProducts, isAdmin }) => {
+export const Products = ({ products: initialProducts, isAdmin, addToCart, isAuthenticated}) => {
+  console.log("🚀 ~ Products ~ addToCart:", addToCart)
   const [products, setProducts] = useState(initialProducts); 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6);
@@ -96,22 +97,33 @@ export const Products = ({ products: initialProducts, isAdmin }) => {
             />
             <h4 className="text-lg font-bold mt-10 m-2">{product.name}</h4>
             <p className="m-4">R{product.price}</p>
-            {isAdmin && (
-              <div className="flex justify-between m-4">
-                <button
-                  className="bg-red-500 text-white px-4 py-2 rounded"
-                  onClick={() => handleDelete(product)}
-                >
-                  <RiDeleteBin6Line />
-                </button>
-                <button
-                  className="bg-blue-500 text-white px-4 py-2 rounded ml-2"
-                  onClick={() => handleUpdate(product)}
-                >
-                  <MdOutlineModeEdit />
-                </button>
-              </div>
-            )}
+              {isAdmin ? (
+                <div className="flex justify-between m-4">
+                  <button
+                    className="bg-red-500 text-white px-4 py-2 rounded"
+                    onClick={() => handleDelete(product)}
+                  >
+                    <RiDeleteBin6Line />
+                  </button>
+                  <button
+                    className="bg-blue-500 text-white px-4 py-2 rounded ml-2"
+                    onClick={() => handleUpdate(product)}
+                  >
+                    <MdOutlineModeEdit />
+                  </button>
+                </div>
+              ) : (
+                isAuthenticated && (
+                  <div className="flex justify-center m-4">
+                    <button
+                      className="bg-green-500 text-white px-4 py-2 rounded"
+                      onClick={() => addToCart(product)}
+                    >
+                      <MdOutlineAddShoppingCart />
+                    </button>
+                  </div>
+                )
+              )}
           </div>
         ))}
       </div>

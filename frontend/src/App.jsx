@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import Products from './pages/Products';
 import AddProduct from './components/addProduct';
 import Modal from './components/Modal';
+import Cart from './components/Cart';
 
 const App = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -18,6 +19,8 @@ const App = () => {
   const [isPopUpVisible, setIsPopUpVisible] = useState(false);
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
+  console.log("🚀 ~ App ~ cart:", cart)
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -74,6 +77,10 @@ const App = () => {
     setProducts([...products, newProduct]);
   };
 
+  const addToCart = (product) => {
+    setCart([...cart, product]);
+  };
+
   return (
     <Router>
       <Navbar 
@@ -91,10 +98,11 @@ const App = () => {
         <Route path='/profile' element={<Profile user={user} />} />
         <Route path='/settings' element={<Settings />} />
         <Route path='/logout' element={<Logout onSignOut={handleSignOut} />} />
-        <Route path='/products' element={<Products products={products} isAdmin={user?.isAdmin} />} />
+        <Route path='/products' element={<Products products={products} isAdmin={user?.isAdmin} isAuthenticated={isAuthenticated} addToCart={addToCart}/>} />
         <Route path='/addProduct' element={<AddProduct newAddProduct={newAddProduct} />} />
+        <Route path='/cart' element={<Cart cart={cart} />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
       <Modal isOpen={isAddProductModalOpen} onClose={handleCloseAddProductModal}>
         <AddProduct newAddProduct={newAddProduct} onClose={handleCloseAddProductModal} />
       </Modal>

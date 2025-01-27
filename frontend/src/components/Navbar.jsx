@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../images/logo-luxe.webp';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import AddProduct from './addProduct';
 import Modal from './Modal';
+import { CiShoppingCart } from "react-icons/ci";
+import Badge from '@material-ui/core/Badge';
+import cart from '../images/cart-1.png';
+import { TiShoppingCart } from "react-icons/ti";
 
-const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleItemClick, togglePopUp, onAddProductClick }) => {
+const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleItemClick, togglePopUp, onAddProductClick, cart=[]}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,7 +30,7 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
     <nav className="bg-[#494949] p-4 border-b border-yellow-500">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center">
-          <Link to="/" className="text-white px-3 py-2 rounded-md text-sm font-medium italic">JEWELS</Link>
+          <Link to="/" className="text-white px-3 py-2 pl-10 rounded-md text-sm font-medium italic"><img src={logo} width={50} className='rounded-full'></img></Link>
         </div>
         <div className="block lg:hidden">
           <button
@@ -36,12 +41,21 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
           </button>
         </div>
         <div className={`w-full block flex-grow lg:flex lg:items-center lg:w-auto ${isOpen ? '' : 'hidden'}`}>
-          <ul className="lg:flex lg:justify-center lg:items-center lg:space-x-4 w-full">
+          <ul className="lg:flex lg:justify-center lg:items-center lg:space-x-10 w-full">
             <li className="block mt-4 lg:mt-0 text-white">
               <Link to="/">Home</Link>
             </li>
             <li className="block mt-4 lg:mt-0 text-white">
-              <Link to="/products">Products</Link>
+              <Link to="/products">Shop</Link>
+            </li>
+            <li className="block mt-4 lg:mt-0 text-white">
+              <Link to="/about">About</Link>
+            </li>
+            <li className="block mt-4 lg:mt-0 text-white">
+              <Link to="/contact">Contact us</Link>
+            </li>
+            <li className='inline-block px-5 '>
+                  <TiShoppingCart className="text-white" size={24} />
             </li>
             {isAuthenticated ? (
               <>
@@ -67,17 +81,26 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
                     className="flex items-center px-3 py-2 rounded-md focus:outline-none"
                     onClick={onAddProductClick}
                   >
-                    Add Product
+                    Dashboard
                   </button>
+                </li>
+              )}
+
+              {isAuthenticated && (
+                <li className="block mt-4 lg:mt-0 text-white">
+                  <Badge badgeContent={cart.length} color="primary">
+                    <CiShoppingCart className="text-white" size={24} />
+                  </Badge>
                 </li>
               )}
               </>
             ) : (
               <li className="block mt-4 lg:mt-0">
-                <button onClick={onSignInClick} className="border p-2 text-sm text-white rounded-md">
+                <button onClick={onSignInClick} className="bg-white border py-1 px-2 text-xs rounded-md font-semibold">
                   Sign In
                 </button>
               </li>
+              
             )}
           </ul>
         </div>
