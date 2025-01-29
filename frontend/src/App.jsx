@@ -102,7 +102,7 @@ const App = () => {
         <Route path='/addProduct' element={<AddProduct newAddProduct={newAddProduct} />} />
         <Route path='/cart' element={<Cart cart={cart} />} />
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
       <Modal isOpen={isAddProductModalOpen} onClose={handleCloseAddProductModal}>
         <AddProduct newAddProduct={newAddProduct} onClose={handleCloseAddProductModal} />
       </Modal>

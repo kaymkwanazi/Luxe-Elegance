@@ -38,10 +38,10 @@ const Home = () => {
       <div className='bg-[#494949]  text-center pt-10 pb-16'>
         <h1 className='text-4xl text-white'>Shop by Category</h1>
         <hr className='mx-auto my-4 w-10 border-t-2 border-[#FFD700] pb-10'></hr>
-        <div className='container mx-auto px-4 grid cols-1 md:grid-cols-4 gap-5'>
+        <div className='container mx-auto px-4 grid cols-1 md:grid-cols-4 gap-10'>
         {categories.map((category, index) => (
             <div key={index} className='flex flex-col items-center bg-white text-black rounded-lg shadow-md overflow-hidden cursor-pointer'>
-              <img src={category.image} alt={category.name} className='w-60 h-48 object-cover'/>
+              <img src={category.image} alt={category.name} className='w-full h-full object-cover'/>
               <div className='p-4'>
                 <h2 className='text-xl font-semibold'>{category.name}</h2>
                 <p className='mt-2'>{category.description}</p>
@@ -59,8 +59,8 @@ const Home = () => {
         <div className='relative'>
             <img src={aboutPic} className=' w-full object-cover rounded-md border-white shadow-md'></img>
           </div>
-          <div className='absolute top-16 left-56'>
-            <img src={aboutPic2} alt='overlay' className='rotate-90 w-full h-80 object-cover rounded-md border-2 border-white shadow-md '></img>
+          <div className="absolute top-28 left-1/4">
+            <img src={aboutPic2} alt='overlay' className='rotate-90 w-full h-96 object-cover rounded-md border-2 border-white shadow-md '></img>
           </div>
           <div>
             <h1 className='text-2xl md:text-6xl text-black font-carattere pb-5'>Discover the timeless beauty of fine jewellery at Luxe Elegance.</h1>
