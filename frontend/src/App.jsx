@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -11,6 +12,7 @@ import Products from './pages/Products';
 import AddProduct from './components/addProduct';
 import Modal from './components/Modal';
 import Cart from './components/Cart';
+import { About } from './pages/About';
 
 const App = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -95,6 +97,7 @@ const App = () => {
       <SignIn modalIsOpen={modalIsOpen} onCloseModal={handleCloseModal} onSignIn={handleSignIn} />
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/about' element={<About />} />
         <Route path='/profile' element={<Profile user={user} />} />
         <Route path='/settings' element={<Settings />} />
         <Route path='/logout' element={<Logout onSignOut={handleSignOut} />} />
