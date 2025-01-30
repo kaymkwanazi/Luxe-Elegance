@@ -10,6 +10,7 @@ import necklaces from '../images/necklace-category.jpg'
 import watches from '../images/women-watch.jpg'
 import aboutPic from '../images/aboutPic-1.jpg'
 import aboutPic2 from '../images/about2.webp'
+import aboutPic3 from '../images/image.png'
 
 const categories = [
   {name: 'Earrings', image: earrings, description: 'From subtle studs to statement pieces, perfect for any occasion'},
@@ -54,26 +55,46 @@ const Home = () => {
       </div>
 
       {/* Mid about Section */}
-      <div className='relative bg-[#DBDBDB] text-center py-10'>
-        <div className='container mx-auto px-4 flex justify-between space-x-36'>
-        <div className='relative'>
-            <img src={aboutPic} className=' w-full object-cover rounded-md border-white shadow-md'></img>
-          </div>
-          <div className="absolute top-28 left-1/4">
-            <img src={aboutPic2} alt='overlay' className='rotate-90 w-full h-96 object-cover rounded-md border-2 border-white shadow-md '></img>
-          </div>
-          <div>
-            <h1 className='text-2xl md:text-6xl text-black font-carattere pb-5'>Discover the timeless beauty of fine jewellery at Luxe Elegance.</h1>
-            <p className='text-lg text-black text-center'>Our exquisite designs are crafted to celebrate life`s most precious moments, blending sophistication with modern artistry. Let every piece tell your unique story of elegance and charm.</p>
-            <Link>
-              <button className='border-2 border-black py-3 px-4 mt-10  hover:bg-slate-100 hover:text-black'>Learn More</button>
-            </Link>
-         
-          </div>
-
+      <div className="relative bg-[#DBDBDB] text-center py-10">
+      <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-start md:space-x-16">
+        {/* Col 1 */}
+        <div className="relative w-3/5 md:w-2/5">
+          {/* Main Picture */}
+          <img
+            src={aboutPic}
+            className="w-full object-cover rounded-md border-white shadow-md"
+            alt="Main Picture"
+          />
+          {/* Secondary Picture */}
+          <img
+            src={aboutPic3}
+            alt="Overlay"
+            className="absolute top-1/2 right-0 transform -translate-y-1/2 translate-x-1/2 w-66 md:w-80 h-auto object-cover rounded-md border-2 border-white shadow-md"
+          />
         </div>
-       
+
+        {/* Col 2 */}
+        <div className="w-full md:w-2/5 mt-10 md:mt-20">
+          <h1 className="text-2xl md:text-6xl text-black font-carattere pb-5">
+            Discover the timeless beauty of fine jewellery at Luxe Elegance.
+          </h1>
+          <p className="text-lg text-black">
+            Our exquisite designs are crafted to celebrate life’s most precious
+            moments, blending sophistication with modern artistry. Let every piece
+            tell your unique story of elegance and charm.
+          </p>
+          <Link href="#">
+            <button className="border-2 border-black py-3 px-4 mt-10 hover:bg-slate-100 hover:text-black">
+              Learn More
+            </button>
+          </Link>
+        </div>
       </div>
+    </div>
+
+
+
+
 
       
     </>

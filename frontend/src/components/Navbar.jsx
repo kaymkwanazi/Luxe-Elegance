@@ -44,27 +44,27 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
         </div>
         <div className={`w-full block flex-grow lg:flex lg:items-center lg:w-auto ${isOpen ? '' : 'hidden'}`}>
           <ul className="lg:flex lg:justify-center lg:items-center lg:space-x-10 w-full">
-            <li className="block mt-4 lg:mt-0 text-white">
+            <li className="block mt-4 lg:mt-0 text-white hover:font-bold">
               <Link to="/">Home</Link>
             </li>
-            <li className="block mt-4 lg:mt-0 text-white">
+            <li className="block mt-4 lg:mt-0 text-white hover:font-bold">
               <Link to="/products">Shop</Link>
             </li>
-            <li className="block mt-4 lg:mt-0 text-white">
+            <li className="block mt-4 lg:mt-0 text-white hover:font-bold">
               <Link to="/about">About</Link>
             </li>
-            <li className="block mt-4 lg:mt-0 text-white">
+            <li className="block mt-4 lg:mt-0 text-white hover:font-bold">
               <Link to="/contact">Contact us</Link>
             </li>
-            <li className='inline-block px-5 '>
-                  <TiShoppingCart className="text-white" size={24} />
+            <li className='inline-block px-5'>
+                  <TiShoppingCart className="text-white " size={24} />
             </li>
             {isAuthenticated ? (
               <>
-              <li className="relative block mt-4 lg:mt-0 text-white">
+              <li className="relative block mt-4 lg:mt-0 text-white hover:font-bold">
                 <button
                   onClick={togglePopUp}
-                  className="flex items-center px-3 py-2 rounded-md focus:outline-none"
+                  className="flex items-center px-3 py-2 rounded-md focus:outline-none "
                 >
                   Account
                 </button>
