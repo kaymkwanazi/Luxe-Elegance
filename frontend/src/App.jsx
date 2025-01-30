@@ -13,6 +13,7 @@ import AddProduct from './components/addProduct';
 import Modal from './components/Modal';
 import Cart from './components/Cart';
 import { About } from './pages/About';
+import { Contact } from './pages/Contact';
 
 const App = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -98,6 +99,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
+        <Route path='/contact' element={<Contact />} />
         <Route path='/profile' element={<Profile user={user} />} />
         <Route path='/settings' element={<Settings />} />
         <Route path='/logout' element={<Logout onSignOut={handleSignOut} />} />

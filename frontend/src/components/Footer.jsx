@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaFacebook, FaFacebookF, FaInstagram, FaInstagramSquare, FaLinkedin, FaLinkedinIn, FaPinterest, FaPinterestP, FaWhatsapp, FaYoutube } from 'react-icons/fa';
+import { FaFacebook, FaFacebookF, FaInstagram, FaInstagramSquare, FaLinkedin, FaLinkedinIn, FaPhone, FaPinterest, FaPinterestP, FaWhatsapp, FaYoutube } from 'react-icons/fa';
 import logo from '../images/logo-luxe.webp'
+import { MdLocationPin, MdOutlineMail } from 'react-icons/md';
 const Footer = () => {
   return (
    <>
@@ -12,13 +13,18 @@ const Footer = () => {
         <div>
           <img src={logo} width={62} className='rounded-full'></img>
         </div>        
-        <div className='flex flex-col gap-4'>
-          <h2 className='text-white text-md font-semibold'>Contact Us</h2>
-          <p className='text-slate-100'>Email: info@example.com</p>
-          <p className='text-slate-100'>Phone: (123) 456-7890</p> 
-          <p className='text-slate-100'>123 Main St, City, State, Zip</p>     
-
-      </div>
+          <div className='flex flex-col gap-5'>
+            <h2 className='text-white font-bold'>Contact Us</h2>
+            <div className='flex items-center text-slate-100'>
+              <FaPhone size={28} className='mr-2' /> (123) 456-7890
+            </div>
+            <div className='flex items-center text-slate-100'>
+              <MdOutlineMail size={28} className='mr-2' /> luxe@unfo.co.za
+            </div>
+            <div className='flex items-center text-slate-100'>
+              <MdLocationPin size={28} className='mr-2' /> 123 Main Street, Pretoria CBD
+            </div>
+          </div>
       </div>
      
       <div className='flex flex-col space-y-5'>

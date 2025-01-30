@@ -8,7 +8,7 @@ export const About = () => {
   return (
     <>
         <div className='min-h-screen bg-cover bg-center relative flex items-center justify-center' style={{backgroundImage: `url(${bgAbout})`}}>
-            <div className='absolute inset-0 bg-black opacity-50'></div>
+            <div className='absolute inset-0 bg-black opacity-40'></div>
             <div className='relative z-10 text-center'>
             <h1 className='text-6xl text-white'>About Us</h1>
             <p className='text-white text-2xl pt-5'>Our Story: Inspired by beauty, Perfected by craft</p>
@@ -18,8 +18,9 @@ export const About = () => {
         <div className='bg-[#808080]'>
             <div className='container mx-auto px-4 py-10 grid cols-1 md:grid-cols-2'>
                 <div className='flex flex-col items-center justify-center'>
-                    <h2 className='text-white font-carattere text-4xl md:text-6xl text-center pb-5'>Crafted with Prescicion and Passion</h2>
-                    <p className='text-white md:text-xl md:font-light text-center pb-10'>
+                    <h2 className='text-white font-carattere text-4xl md:text-6xl text-center '>Crafted with Prescicion and Passion</h2>
+                    <hr className='mx-auto my-4 w-10 border-t-2 border-[#FFD700] '></hr>
+                    <p className='text-white md:text-xl md:font-light text-center'>
                         At Luxe Elegance, each piece of jewellery is a masterpiece, meticulously handcrafted by skilled artisans who pour their passion and expertise into every detail. 
                         We source only the finest materials, from ethically mined gemstones to premium metals, ensuring that every creation is as sustainable as it is stunning. 
                         Our designs are inspired by timeless elegance and modern sophistication, blending artistry and innovation to create jewellery that transcends trends. 

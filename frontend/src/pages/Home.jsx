@@ -75,7 +75,7 @@ const Home = () => {
 
         {/* Col 2 */}
         <div className="w-full md:w-2/5 mt-10 md:mt-20">
-          <h1 className="text-2xl md:text-6xl text-black font-carattere pb-5">
+          <h1 className="text-4xl md:text-6xl text-black font-carattere pb-5">
             Discover the timeless beauty of fine jewellery at Luxe Elegance.
           </h1>
           <p className="text-lg text-black">
