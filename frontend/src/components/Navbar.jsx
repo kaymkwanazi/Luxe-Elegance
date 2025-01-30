@@ -10,6 +10,7 @@ import { CiShoppingCart } from "react-icons/ci";
 import Badge from '@material-ui/core/Badge';
 import cart from '../images/cart-1.png';
 import { TiShoppingCart } from "react-icons/ti";
+import { MdAccountCircle } from 'react-icons/md';
 
 const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleItemClick, togglePopUp, onAddProductClick, cart=[]}) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,9 +57,7 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
             <li className="block mt-4 lg:mt-0 text-white hover:font-bold">
               <Link to="/contact">Contact us</Link>
             </li>
-            <li className='inline-block px-5'>
-                  <TiShoppingCart className="text-white " size={24} />
-            </li>
+           
             {isAuthenticated ? (
               <>
               <li className="relative block mt-4 lg:mt-0 text-white hover:font-bold">
@@ -66,7 +65,7 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
                   onClick={togglePopUp}
                   className="flex items-center px-3 py-2 rounded-md focus:outline-none "
                 >
-                  Account
+                  <MdAccountCircle size={32} />
                 </button>
                 {isPopUpVisible && (
                   <div className="absolute z-50 right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1">
@@ -83,7 +82,7 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
                     className="flex items-center px-3 py-2 rounded-md focus:outline-none"
                     onClick={onAddProductClick}
                   >
-                    Dashboard
+                   Add Product
                   </button>
                 </li>
               )}
