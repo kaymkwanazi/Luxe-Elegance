@@ -8,20 +8,20 @@ export const AdminDashboard = () => {
     <>
     <div className='flex h-screen'>
         {/* Side bar */}
-        <aside className='w-1/5 bg-[#494949] text-white flex flex-col justify-center items-center border-r-2 border-r-yellow-500'>
-            <div className='flex items-center justify-center mb-6'>
-                <img src={logo} alt='logo' className='w-20 h-20 rounded-full'/>
+        <aside className='w-1/5 py-5 bg-[#494949] text-white flex flex-col items-center border-r-2 border-r-yellow-500'>
+            <div className='flex items-center justify-center'>
+                <img src={logo} alt='logo' className='rounded-full' width={52}/>
             </div>
-            <nav className='text-white'>
+            <nav className='text-white flex-grow flex flex-col items-center py-28 space-y-5'>
                 <a href='/dashboard' className='block py-2 px-4 hover:bg-[#333333] hover:border hover:border-white'>Dashboard</a>
                 <a href='/dashboard' className='block py-2 px-4 hover:bg-[#333333] hover:border hover:border-white'>Products</a>
                 <a href='/dashboard' className='block py-2 px-4 hover:bg-[#333333] hover:border hover:border-white'>Users</a>
-                <a href='/dashboard' className='block py-2 px-4 hover:bg-[#333333] hover:border hover:border-white'>Settings</a>
+                <a href='/settings' className='block py-2 px-4 hover:bg-[#333333] hover:border hover:border-white'>Settings</a>
             </nav>
-
-            <button className='px-2 py-2 bg-white text-black text-sm rounded-lg mt-4'>
-                Logout
-            </button>
+            <div className=''>
+                <button className='px-5 py-2 bg-white text-black text-sm rounded-lg mt-4'>Logout</button>
+            </div>
+           
             
         </aside>
 
