@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import SignIn from './components/SignIn';
 import Home from './pages/Home';
@@ -14,6 +14,8 @@ import Modal from './components/Modal';
 import Cart from './components/Cart';
 import { About } from './pages/About';
 import { Contact } from './pages/Contact';
+import { AdminDashboard } from './pages/AdminDashboard';
+
 
 const App = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -24,6 +26,9 @@ const App = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   console.log("🚀 ~ App ~ cart:", cart)
+
+  const location = useLocation();
+  const shouldShowNavbarAndFooter = location.pathname !== '/dashboard';
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -85,34 +90,39 @@ const App = () => {
   };
 
   return (
-    <Router>
-      <Navbar 
+    <div>
+      {shouldShowNavbarAndFooter && (<Navbar 
         onSignInClick={handleSignInClick} 
-        isAuthenticated={isAuthenticated} 
-        user={{isAdmin:true, user}}
-        isPopUpVisible={isPopUpVisible}
-        togglePopUp={togglePopUp}
-        handleItemClick={handleItemClick}
         onAddProductClick={handleAddProductClick}
-      />
-      <SignIn modalIsOpen={modalIsOpen} onCloseModal={handleCloseModal} onSignIn={handleSignIn} />
-      <Routes>
+        />
+      )}
+    <SignIn modalIsOpen={modalIsOpen} onCloseModal={handleCloseModal} onSignIn={handleSignIn} />
+    <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />
+        <Route path='dashboard' element={<AdminDashboard />} />
         <Route path='/profile' element={<Profile user={user} />} />
         <Route path='/settings' element={<Settings />} />
         <Route path='/logout' element={<Logout onSignOut={handleSignOut} />} />
         <Route path='/products' element={<Products products={products} isAdmin={user?.isAdmin} isAuthenticated={isAuthenticated} addToCart={addToCart}/>} />
         <Route path='/addProduct' element={<AddProduct newAddProduct={newAddProduct} />} />
         <Route path='/cart' element={<Cart cart={cart} />} />
-      </Routes>
-      <Footer />
-      <Modal isOpen={isAddProductModalOpen} onClose={handleCloseAddProductModal}>
+    </Routes>
+    {shouldShowNavbarAndFooter && <Footer />}
+    <Modal isOpen={isAddProductModalOpen} onClose={handleCloseAddProductModal}>
         <AddProduct newAddProduct={newAddProduct} onClose={handleCloseAddProductModal} />
-      </Modal>
+    </Modal>
+    </div>
+  );
+};
+
+const AppWrapper = () => {
+  return (
+    <Router>
+      <App />
     </Router>
   );
 };
 
-export default App;
+export default AppWrapper;

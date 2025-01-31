@@ -78,12 +78,14 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
               {/* Button For adding products */}
               {user.isAdmin && (
                 <li className="relative block mt-4 lg:mt-0 text-white">
+                  <Link to='/dashboard' className="flex items-center px-3 py-2 rounded-md focus:outline-none">
                   <button
-                    className="flex items-center px-3 py-2 rounded-md focus:outline-none"
-                    onClick={onAddProductClick}
+                    // className="flex items-center px-3 py-2 rounded-md focus:outline-none"
+                    // onClick={onAddProductClick}
                   >
-                   Add Product
+                  Dashboard
                   </button>
+                  </Link>
                 </li>
               )}
 

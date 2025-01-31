@@ -27,11 +27,18 @@ const SignIn = ({ modalIsOpen, onCloseModal, onSignIn }) => {
         credentials: 'include', // Ensure cookies are included
       });
       const data = await response.json();
+      console.log('response data' , data);
       if (response.ok) {
         localStorage.setItem('token', data.token);
         onSignIn(data); // Pass user data to the parent component
+        if (data.isAdmin) {
+          console.log('Admin, navigating to dashboard');
+          navigate('/dashboard'); // Redirect to admin dashboard
+        } else {
+          console.log('User is not admin, navigating to home');
         navigate('/'); // Redirect to home page
-      } else {
+      } 
+    } else {
         alert(data.message || 'Invalid email or password');
       }
     } catch (error) {
