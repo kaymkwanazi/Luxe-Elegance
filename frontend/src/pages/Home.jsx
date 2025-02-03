@@ -83,10 +83,8 @@ const Home = () => {
             moments, blending sophistication with modern artistry. Let every piece
             tell your unique story of elegance and charm.
           </p>
-          <Link href="#">
-            <button className="border-2 border-black py-3 px-4 mt-10 hover:bg-slate-100 hover:text-black">
+          <Link to="/about" className="border-2 border-black py-3 px-4 mt-10 hover:bg-slate-100 hover:text-black">
               Learn More
-            </button>
           </Link>
         </div>
       </div>
