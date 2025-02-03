@@ -49,14 +49,14 @@ const handleLogout = () => {
                 text: 'Cancel',
                 value: null,
                 visible: true,
-                className: 'swal-button-cancel',
+                className: 'mr-10',
                 closeModal: true
             },
             confirm: {
                 text: 'Logout',
                 value: true,
                 visible: true,
-                className: 'swal-button-confirm',
+                className: 'mr-28',
                 closeModal: true
               }
         },
