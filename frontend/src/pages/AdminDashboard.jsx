@@ -2,10 +2,13 @@ import React, { useEffect, useState, use } from 'react'
 import logo from '../images/logo-luxe.webp'
 import { IoMdNotifications } from "react-icons/io";
 import { MdAccountCircle } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
+import { UsersAndProducts } from '../components/UsersAndProducts';
 
 export const AdminDashboard = () => {
     const [admin, setAdmin] = React.useState(null)
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchAdminDetails = async () => {
@@ -36,6 +39,21 @@ export const AdminDashboard = () => {
     fetchAdminDetails();
 }, []);
 
+const handleLogout = () => {    
+    swal({
+        title: 'Cornfirm Logout',
+        text: 'Are you sure you want to logout?',
+        icon: 'warning',
+        buttons: ['Cancel', 'Logout'],
+        dangerMode: true,
+    }).then((willLogout) => {
+        if (willLogout) {
+            localStorage.removeItem('token');
+            navigate('/');
+        }
+    });
+};
+
   return (
     <>
     <div className='flex h-screen'>
@@ -50,17 +68,15 @@ export const AdminDashboard = () => {
                 <a href='/dashboard' className='block py-2 px-4 hover:bg-[#333333] hover:border hover:border-white'>Users</a>
                 <a href='/Settings' className='block py-2 px-4 hover:bg-[#333333] hover:border hover:border-white'>Settings</a>
             </nav>
-            <div className='mt-auto'>
-                <Link to ='/'>
-                    <button className='px-5 py-2 bg-white text-black text-sm rounded-lg mt-4'>Logout</button>
-                </Link>
-            </div>
-           
-            
+            <div className='mt-auto py-10'>
+                <button className='px-5 py-2 bg-white text-black text-sm rounded-lg mt-4'
+                onClick={handleLogout}>Logout</button>
+            </div>      
         </aside>
 
         {/* Main content */}
         <main className='flex-1 bg-[#EEDAEA] border-t-2 '>
+            {/* header */}
             <div className='container mx-auto px-5 py-5 flex justify-between items-center mb-6'>
                 <h1 className=' text-xl font-semibold'>Welcome {admin ? admin.name: 'User'}!</h1>
                 <div className="flex items-center justify-between space-x-4">
@@ -75,9 +91,12 @@ export const AdminDashboard = () => {
                     </button>
 
                 </div>
-
             </div>
 
+            {/* Total items and users */}
+            <div className='container mx-auto px-5 py-5'>
+                <UsersAndProducts />
+            </div>
         </main>
     </div>
     </> 
