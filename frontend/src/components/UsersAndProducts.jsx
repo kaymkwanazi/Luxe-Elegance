@@ -6,19 +6,24 @@ export const UsersAndProducts = () => {
 
     useEffect(() => {
         const fetchUsers = async () => {
-            try {
-                const response = await fetch('http://localhost:5000/api/users/');
-                if (!response.ok) {
-                    throw new Error('Failed to fetch users');
-                }
-                const data = await response.json();
-                setUsers(data);
-            } catch (error) {
-                console.error(error.message);
+          try {
+            const token = localStorage.getItem('token'); // Adjust this line based on where you store the token
+            const response = await fetch('http://localhost:5000/api/users', {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            });
+            if (!response.ok) {
+              throw new Error('Failed to fetch users');
             }
+            const data = await response.json();
+            setUsers(data);
+          } catch (error) {
+            console.error(error.message);
+          }
         };
         fetchUsers();
-    }, []);
+      }, []);
 
     useEffect(() => {      
         const fetchProducts = async () => {

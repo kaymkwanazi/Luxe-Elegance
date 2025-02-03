@@ -44,7 +44,22 @@ const handleLogout = () => {
         title: 'Cornfirm Logout',
         text: 'Are you sure you want to logout?',
         icon: 'warning',
-        buttons: ['Cancel', 'Logout'],
+        buttons: {
+            cancel: {
+                text: 'Cancel',
+                value: null,
+                visible: true,
+                className: 'swal-button-cancel',
+                closeModal: true
+            },
+            confirm: {
+                text: 'Logout',
+                value: true,
+                visible: true,
+                className: 'swal-button-confirm',
+                closeModal: true
+              }
+        },
         dangerMode: true,
     }).then((willLogout) => {
         if (willLogout) {
