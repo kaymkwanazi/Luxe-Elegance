@@ -92,8 +92,14 @@ const App = () => {
   return (
     <div>
       {shouldShowNavbarAndFooter && (<Navbar 
+        isAuthenticated={isAuthenticated}
+        user={user}
         onSignInClick={handleSignInClick} 
         onAddProductClick={handleAddProductClick}
+        isPopUpVisible={isPopUpVisible}
+        handleItemClick={handleItemClick}
+        togglePopUp={togglePopUp}
+        cart={cart}
         />
       )}
     <SignIn modalIsOpen={modalIsOpen} onCloseModal={handleCloseModal} onSignIn={handleSignIn} />

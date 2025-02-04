@@ -29,14 +29,6 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
     setIsModalOpen(!isModalOpen);
   };
 
-//   useEffect(() => {
-//     const storedUser = localStorage.getItem('user');
-//     if (storedUser) {
-//       setUser(JSON.parse(storedUser));
-//     }
-
-// }, []);
-
   return (
     <nav className="bg-[#494949] p-4 border-b border-yellow-500">
       <div className="container mx-auto flex justify-between items-center">

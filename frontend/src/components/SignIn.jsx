@@ -1,3 +1,6 @@
+/* eslint-disable no-irregular-whitespace */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import signinPic from '../images/Jewellery shop.png';
@@ -18,34 +21,35 @@ const SignIn = ({ modalIsOpen, onCloseModal, onSignIn }) => {
   const [isAdmin, setIsAdmin] = useState(false);
 
   const handleSignIn = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch('http://localhost:5000/api/users/auth', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-        credentials: 'include', // Ensure cookies are included
-      });
-      const data = await response.json();
-      console.log('response data' , data);
-      if (response.ok) {
-        localStorage.setItem('token', data.token);
-        onSignIn(data); // Pass user data to the parent component
-        if (data.isAdmin) {
-          console.log('Admin, navigating to dashboard');
-          navigate('/dashboard'); // Redirect to admin dashboard
-        } else {
-          console.log('User is not admin, navigating to home');
-        navigate('/'); // Redirect to home page
-      } 
-    } else {
-        alert(data.message || 'Invalid email or password');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Sign-in failed');
-    }
-  };
+      e.preventDefault();
+      try {
+        const response = await fetch('http://localhost:5000/api/users/auth', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+          credentials: 'include', // Ensure cookies are included
+        });
+        const data = await response.json();
+        console.log('response data', data);
+        if (response.ok) {
+          localStorage.setItem('token', data.token);
+          onSignIn(data); // Pass user data to the parent component
+          
+          if (data.isAdmin) {
+            console.log('Admin, navigating to dashboard');
+            navigate('/dashboard'); // Redirect to admin dashboard
+          } else {
+            console.log('User is not admin, navigating to home');
+            navigate('/'); // Redirect to home page
+          } 
+        } else {
+          alert(data.message || 'Invalid email or password');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Sign-in failed');
+      }
+    };
 
   const handleRegister = async (e) => {
     e.preventDefault();
