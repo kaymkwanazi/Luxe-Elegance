@@ -21,6 +21,7 @@ export const AdminDashboard = () => {
 
             {/* Total items and users */}
             <div className='container mx-auto px-5 py-5'>
+                <h1 className='text-4xl mb-10'>Dashboard</h1>
                 <UsersAndProducts />
             </div>
         </main>

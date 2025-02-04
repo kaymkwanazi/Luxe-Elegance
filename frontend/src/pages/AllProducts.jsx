@@ -40,8 +40,8 @@ const AllProducts = () => {
         {/* Header */}
         <AdminNavbar />
         {/* Products list */}
-        <div className='container mx-auto px-5 py-10'>
-          <h1 className='text-2xl mb-5 font-semibold'>All Products</h1>
+        <div className='container mx-auto px-10 py-10'>
+          <h1 className='text-4xl mb-10'>All Products</h1>
           <ul className='flex flex-col space-y-4'>
             {products.map(product => (
               <li key={product.id} className='flex items-center '>

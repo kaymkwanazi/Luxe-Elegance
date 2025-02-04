@@ -34,9 +34,8 @@ export const AllUsers = () => {
         {/* Header */}
         <AdminNavbar />
         {/* Users list */}
-        <div className='container mx-auto px-5 py-10'>
-          <h1 className='text-2xl mb-5 font-semibold'>All Users</h1>
-          
+        <div className='container mx-auto px-10 py-10'>
+          <h1 className='text-4xl mb-10 '>All Users</h1>         
           <ul className='flex flex-col space-y-4'>
             {allUsers.map(user => (
               <li key={user.id} className='flex items-center'>
