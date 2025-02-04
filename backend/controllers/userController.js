@@ -61,6 +61,17 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
+//Getting all users
+//ROUTE - GET /api/users/
+const getUsers = asyncHandler(async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching users', error: error.message });
+  }
+});
+
 // Log out user
 const logoutUser = asyncHandler(async (req, res) => {
   res.cookie('jwt', '', {
@@ -138,4 +149,4 @@ const updateUserToAdmin = asyncHandler(async (req, res) => {
 
 });
 
-export { authUser, registerUser, logoutUser, getUserProfile, updateUserProfile, updateUserToAdmin };
+export { authUser, registerUser,logoutUser, getUserProfile, updateUserProfile, updateUserToAdmin, getUsers };

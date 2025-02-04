@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../images/logo-luxe.webp';
 import { FaBars, FaTimes } from 'react-icons/fa';
@@ -9,7 +9,6 @@ import Modal from './Modal';
 import { CiShoppingCart } from "react-icons/ci";
 import Badge from '@material-ui/core/Badge';
 import cart from '../images/cart-1.png';
-import { TiShoppingCart } from "react-icons/ti";
 import { MdAccountCircle } from 'react-icons/md';
 
 const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleItemClick, togglePopUp, onAddProductClick, cart=[]}) => {
@@ -29,6 +28,14 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
+
+//   useEffect(() => {
+//     const storedUser = localStorage.getItem('user');
+//     if (storedUser) {
+//       setUser(JSON.parse(storedUser));
+//     }
+
+// }, []);
 
   return (
     <nav className="bg-[#494949] p-4 border-b border-yellow-500">
@@ -61,23 +68,23 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
            
             {isAuthenticated ? (
               <>
-              <li className="relative block mt-4 lg:mt-0 text-white hover:font-bold">
-                <button
-                  onClick={togglePopUp}
-                  className="flex items-center px-3 py-2 rounded-md focus:outline-none "
-                >
-                  <MdAccountCircle size={32} />
-                </button>
-                {isPopUpVisible && (
-                  <div className="absolute z-50 right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1">
-                    <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={() => { handleItemClick(); }} >Profile</Link>
-                    <Link to="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={() => { handleItemClick(); }}>Settings</Link>
-                    <Link to="/logout" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={() => { handleItemClick(); }}>Sign Out</Link>
-                  </div>
-                )}
-              </li>
+                <li className="relative block mt-4 lg:mt-0 text-white hover:font-bold">
+                  <button
+                    onClick={togglePopUp}
+                    className="flex items-center px-3 py-2 rounded-md focus:outline-none "
+                  >
+                    <MdAccountCircle size={32} />
+                  </button>
+                  {isPopUpVisible && (
+                    <div className="absolute z-50 right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1">
+                      <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={() => { handleItemClick(); }} >Profile</Link>
+                      <Link to="/settings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={() => { handleItemClick(); }}>Settings</Link>
+                      <Link to="/logout" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={() => { handleItemClick(); }}>Sign Out</Link>
+                    </div>
+                  )}
+                </li>
               {/* Button For adding products */}
-              {user.user.isAdmin && (
+              {user.isAdmin && (
                 <li className="relative block mt-4 lg:mt-0 text-white">
                   <button
                     className="flex items-center px-3 py-2 rounded-md focus:outline-none"
@@ -102,10 +109,9 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
                   Sign In
                 </button>
               </li>
-              
             )}
-          </ul>
-        </div>
+            </ul>
+          </div>
       </div>
 
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>

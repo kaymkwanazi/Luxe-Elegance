@@ -7,7 +7,7 @@ import aboutpIC2 from '../images/bg-03.jpg'
 export const About = () => {
   return (
     <>
-        <div className='min-h-screen bg-cover bg-center relative flex items-center justify-center' style={{backgroundImage: `url(${bgAbout})`}}>
+        <div className='min-h-96 bg-cover bg-center relative flex items-center justify-center' style={{backgroundImage: `url(${bgAbout})`}}>
             <div className='absolute inset-0 bg-black opacity-40'></div>
             <div className='relative z-10 text-center'>
             <h1 className='text-6xl text-white'>About Us</h1>
