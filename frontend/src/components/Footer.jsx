@@ -19,7 +19,7 @@ const Footer = () => {
               <FaPhone size={28} className='mr-2' /> (123) 456-7890
             </div>
             <div className='flex items-center text-slate-100'>
-              <MdOutlineMail size={28} className='mr-2' /> luxe@unfo.co.za
+              <MdOutlineMail size={28} className='mr-2' /> luxe@info.co.za
             </div>
             <div className='flex items-center text-slate-100'>
               <MdLocationPin size={28} className='mr-2' /> 123 Main Street, Pretoria CBD
@@ -46,7 +46,7 @@ const Footer = () => {
         </div>
           <h2 className='text-white font-semibold text-xl text-center'>Follow us</h2>
           <div className='flex justify-center gap-10 '>
-            <FaFacebookF size={32} className='text-slate-100' />
+            <FaFacebook size={32} className='text-slate-100' />
             <FaPinterestP size={32} className='text-slate-100' />
             <FaInstagram size={32} className='text-slate-100' />
             <FaLinkedinIn size={32} className='text-slate-100' />

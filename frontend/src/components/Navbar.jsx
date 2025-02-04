@@ -13,6 +13,7 @@ import { TiShoppingCart } from "react-icons/ti";
 import { MdAccountCircle } from 'react-icons/md';
 
 const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleItemClick, togglePopUp, onAddProductClick, cart=[]}) => {
+  console.log("🚀 ~ Navbar ~ user:", user)
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -76,7 +77,7 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
                 )}
               </li>
               {/* Button For adding products */}
-              {user.isAdmin && (
+              {user.user.isAdmin && (
                 <li className="relative block mt-4 lg:mt-0 text-white">
                   <button
                     className="flex items-center px-3 py-2 rounded-md focus:outline-none"

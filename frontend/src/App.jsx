@@ -23,7 +23,6 @@ const App = () => {
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
-  console.log("🚀 ~ App ~ cart:", cart)
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -89,7 +88,7 @@ const App = () => {
       <Navbar 
         onSignInClick={handleSignInClick} 
         isAuthenticated={isAuthenticated} 
-        user={{isAdmin:true, user}}
+        user={{user}}
         isPopUpVisible={isPopUpVisible}
         togglePopUp={togglePopUp}
         handleItemClick={handleItemClick}

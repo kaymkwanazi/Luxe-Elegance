@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import Modal from '../components/Modal';
@@ -8,8 +10,8 @@ import { MdOutlineModeEdit , MdOutlineAddShoppingCart} from "react-icons/md";
 
 
 export const Products = ({ products: initialProducts, isAdmin, addToCart, isAuthenticated}) => {
-  console.log("🚀 ~ Products ~ addToCart:", addToCart)
   const [products, setProducts] = useState(initialProducts); 
+  console.log("🚀 ~ Products ~ products:", products)
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6);
   const [selectedProduct, setSelectedProduct] = useState(null);

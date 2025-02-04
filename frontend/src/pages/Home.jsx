@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { useState } from 'react'
 import pic1 from '../images/hand with gold ring.jpg'
 // import aboutPic from '../images/aboutPic.jpg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Products } from './Products';
 import earrings from '../images/earrings-category.jpg'
 import bracelets from  '../images/bracelet-category.png'
@@ -20,6 +20,13 @@ const categories = [
 ]
 
 const Home = () => {
+  // const history  = useHistory();
+
+  const handleCategoryClick = (category) => {
+    console.log("🚀 ~ handleCategoryClick ~ category:", category)
+    //navigate to /products then filter the products based on the category
+  };
+
   return (
     <>
     {/* Hero section */}
@@ -40,14 +47,13 @@ const Home = () => {
         <h1 className='text-4xl text-white'>Shop by Category</h1>
         <hr className='mx-auto my-4 w-10 border-t-2 border-[#FFD700] pb-10'></hr>
         <div className='container mx-auto px-4 grid cols-1 md:grid-cols-4 gap-10'>
-        {categories.map((category, index) => (
-            <div key={index} className='flex flex-col items-center bg-white text-black rounded-lg shadow-md overflow-hidden cursor-pointer'>
-              <img src={category.image} alt={category.name} className='w-full h-full object-cover'/>
-              <div className='p-4'>
-                <h2 className='text-xl font-semibold'>{category.name}</h2>
-                <p className='mt-2'>{category.description}</p>
-              </div>
-               
+          {categories.map((category, index) => (
+            <div key={index}  onClick={() => handleCategoryClick(category.name)} className='flex flex-col items-center bg-white text-black rounded-lg shadow-md overflow-hidden cursor-pointer '>
+                <img src={category.image} alt={category.name} className='w-full h-full object-cover transform transition duration-300 hover:scale-110'/>
+                <div className='p-4'>
+                  <h2 className='text-xl font-semibold'>{category.name}</h2>
+                  <p className='mt-2'>{category.description}</p>
+                </div>
             </div>
           ))}
          </div>
