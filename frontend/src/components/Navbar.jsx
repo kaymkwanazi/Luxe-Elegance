@@ -12,7 +12,6 @@ import cart from '../images/cart-1.png';
 import { MdAccountCircle } from 'react-icons/md';
 
 const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleItemClick, togglePopUp, onAddProductClick, cart=[]}) => {
-  console.log("🚀 ~ Navbar ~ user:", user)
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);

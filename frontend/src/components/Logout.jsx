@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 const Logout = ({ onSignOut }) => {
   const navigate = useNavigate();
+  console.log("🚀 ~ Logout ~ navigate:", "Logging out!!!!!!!!!!!!!!!!!!!")
+  
 
   useEffect(() => {
     onSignOut();

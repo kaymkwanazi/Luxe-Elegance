@@ -7,11 +7,25 @@ import UpdateProduct from '../components/UpdateProduct';
 import { MdDelete, MdDeleteOutline } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { MdOutlineModeEdit , MdOutlineAddShoppingCart} from "react-icons/md";
+import { useLocation } from 'react-router-dom';
 
 
 export const Products = ({ products: initialProducts, isAdmin, addToCart, isAuthenticated}) => {
-  const [products, setProducts] = useState(initialProducts); 
-  console.log("🚀 ~ Products ~ products:", products)
+  const location = useLocation();
+  const selectedCategory = location.state?.category || '';
+
+  const [products, setProducts] = useState(
+    selectedCategory ? initialProducts.filter(product => product.category === selectedCategory) : initialProducts
+  );
+  
+  useEffect(() => {
+    if (!selectedCategory) {
+      setProducts(initialProducts);
+    } else {
+      setProducts(initialProducts.filter(product => product.category === selectedCategory));
+    }
+  }, [selectedCategory, initialProducts]);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6);
   const [selectedProduct, setSelectedProduct] = useState(null);

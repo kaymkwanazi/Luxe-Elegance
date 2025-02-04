@@ -13,20 +13,18 @@ import aboutPic2 from '../images/about2.webp'
 import aboutPic3 from '../images/image.png'
 
 const categories = [
-  {name: 'Earrings', image: earrings, description: 'From subtle studs to statement pieces, perfect for any occasion'},
-  {name: 'Bracelets', image: bracelets, description: 'Elegant designs to adorn your wrist with timeless charm'},
-  {name: 'Necklaces', image: necklaces, description: 'Beautifully crafted pendants and chains to complement your style'},
-  {name: 'Watches', image: watches, description: 'Stylish timepieces that blend functionality with sophistication'},
+  {name: 'earrings', image: earrings, description: 'From subtle studs to statement pieces, perfect for any occasion'},
+  {name: 'bracelet', image: bracelets, description: 'Elegant designs to adorn your wrist with timeless charm'},
+  {name: 'necklace', image: necklaces, description: 'Beautifully crafted pendants and chains to complement your style'},
+  {name: 'watches', image: watches, description: 'Stylish timepieces that blend functionality with sophistication'},
 ]
 
 const Home = () => {
   // const history  = useHistory();
-
+  const navigate = useNavigate();
   const handleCategoryClick = (category) => {
-    console.log("🚀 ~ handleCategoryClick ~ category:", category)
-    //navigate to /products then filter the products based on the category
+    navigate('/products', { state: { category } });
   };
-
   return (
     <>
     {/* Hero section */}

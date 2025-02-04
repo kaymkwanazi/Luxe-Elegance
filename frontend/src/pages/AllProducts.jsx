@@ -7,6 +7,7 @@ import { AdminNavbar } from '../components/AdminNavbar';
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
+  const [multipleSelected, setMultipleSelected] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -22,12 +23,15 @@ const AllProducts = () => {
   }, []);
 
   const handleCheckboxChange = (productId) => {
-    setSelectedProducts(prevSelectedProducts => {
-      if (prevSelectedProducts.includes(productId)) {
-        return prevSelectedProducts.filter(id => id !== productId);
-      } else {
-        return [...prevSelectedProducts, productId];
-      }
+    setSelectedProducts(prevSelected => {
+      const isSelected = prevSelected.includes(productId);
+      const newSelected = isSelected
+        ? prevSelected.filter(id => id !== productId)
+        : [...prevSelected, productId];
+
+      setMultipleSelected(newSelected.length > 1);
+
+      return newSelected;
     });
   };
 
@@ -44,16 +48,14 @@ const AllProducts = () => {
           <h1 className='text-4xl mb-10'>All Products</h1>
           <ul className='flex flex-col space-y-4'>
             {products.map(product => (
-              <li key={product.id} className='flex items-center '>
+              <li key={product.id} className='flex items-center'>
                 <input
                   type='checkbox'
+                  onChange={() => handleCheckboxChange(product._id)}
                   className='mr-4'
-                  checked={selectedProducts.includes(product.id)}
-                  onChange={() => handleCheckboxChange(product.id)}
                 />
                 <div>
-                  <h2 className='text-xl '>{product.name}</h2>
-                  
+                  <h2 className='text-xl'>{product.name}</h2>
                 </div>
               </li>
             ))}

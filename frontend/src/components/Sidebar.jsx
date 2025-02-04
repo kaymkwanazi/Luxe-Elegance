@@ -32,7 +32,7 @@ export const Sidebar = () => {
         }).then((willLogout) => {
             if (willLogout) {
                 localStorage.removeItem('token');
-                navigate('/');
+                navigate('/Logout');
             }
         });
     };
