@@ -15,7 +15,7 @@ export const AdminDashboard = () => {
         {/* Side bar */}
         <Sidebar />
         {/* Main content */}
-        <main className='flex-1 bg-[#EEDAEA] border-t-2 '>
+        <main className='flex-1 bg-[#EEDAEA] border-t-2'>
             {/* header */}
             <AdminNavbar />
 

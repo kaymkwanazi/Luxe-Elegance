@@ -15,6 +15,8 @@ import Cart from './components/Cart';
 import { About } from './pages/About';
 import { Contact } from './pages/Contact';
 import { AdminDashboard } from './pages/AdminDashboard';
+import AllProducts from './pages/AllProducts';
+import AllUsers from './pages/AllUsers';
 
 
 const App = () => {
@@ -28,7 +30,7 @@ const App = () => {
   console.log("🚀 ~ App ~ cart:", cart)
 
   const location = useLocation();
-  const shouldShowNavbarAndFooter  =! ['/dashboard', '/Settings', ''].includes(location.pathname);
+  const shouldShowNavbarAndFooter  =! ['/dashboard', '/Settings', '/allProducts', '/allUsers'].includes(location.pathname);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -114,6 +116,8 @@ const App = () => {
         <Route path='/products' element={<Products products={products} isAdmin={user?.isAdmin} isAuthenticated={isAuthenticated} addToCart={addToCart}/>} />
         <Route path='/addProduct' element={<AddProduct newAddProduct={newAddProduct} />} />
         <Route path='/cart' element={<Cart cart={cart} />} />
+        <Route path='/allProducts' element={<AllProducts />} />
+        <Route path='/AllUsers' element={<AllUsers />} />
     </Routes>
     {shouldShowNavbarAndFooter && <Footer />}
     <Modal isOpen={isAddProductModalOpen} onClose={handleCloseAddProductModal}>
