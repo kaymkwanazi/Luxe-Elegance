@@ -38,7 +38,7 @@ export const AdminNavbar = () => {
   return (
     <header>
         <div className='container mx-auto px-5 py-5 flex justify-between items-center mb-6'>
-                <h1 className=' text-xl font-semibold'>Welcome {admin ? admin.name: 'User'}!</h1>
+                <h1 className=' text-2xl font-semibold'>Welcome {admin ? admin.name: 'User'}!</h1>
                 <div className="flex items-center justify-between space-x-4">
                     <button>
                         <IoMdNotifications size={24} className='text-gray-500'/>

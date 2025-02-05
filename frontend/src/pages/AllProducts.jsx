@@ -52,12 +52,15 @@ const AllProducts = () => {
         <div className='container mx-auto px-10 py-10'>
           <div className='flex justify-between'>
             <h1 className='text-4xl mb-10'>Product Inventory</h1>
+            <div>
               <button
-                onClick={() => setIsModalOpen(true)}
-                className='bg-blue-500 text-white px-4 py-2 rounded'
-              >
-                Add Product
+                  onClick={() => setIsModalOpen(true)}
+                  className='bg-blue-500 text-white p-3 rounded'
+                >
+                  Add Product
               </button>
+            </div>
+             
           </div>
           <ul className='flex flex-col space-y-4'>
             {products.map(product => (
