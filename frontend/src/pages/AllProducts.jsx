@@ -62,20 +62,43 @@ const AllProducts = () => {
             </div>
              
           </div>
-          <ul className='flex flex-col space-y-4'>
-            {products.map(product => (
-              <li key={product.id} className='flex items-center'>
-                <input
-                  type='checkbox'
-                  onChange={() => handleCheckboxChange(product._id)}
-                  className='mr-4'
-                />
-                <div>
-                  <h2 className='text-xl'>{product.name}</h2>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <div>
+          <table className='min-w-full bg-white'>
+              <thead className='bg-slate-200'>
+                <tr>
+                  <th className='py-2 px-4 border-b border-r border-r-black'>Select</th>
+                  <th className='py-2 px-4 border-b border-r border-r-black'>Product Name</th>
+                  <th className='py-2 px-4 border-b border-r border-r-black'>Description</th>
+                  <th className='py-2 px-4 border-b border-r border-r-black'>Category</th>
+                  <th className='py-2 px-4 border-b'>Price</th>
+                  {/* <th className='py-2 px-4 border-b '>Inventory</th> */}
+                  
+                </tr>
+              </thead>
+              <tbody>
+                {products.map(product => (
+                  <tr key={product.id}>
+                    <td className='py-2 px-4 border-b border-r border-r-black'>
+                      <div className='flex justify-center items-center'>
+                          <input
+                            type='checkbox'
+                            onChange={() => handleCheckboxChange(product._id)}
+                          />
+                      </div>
+                    </td>
+                    <td className='py-2 px-4 border-b border-r border-r-black'>{product.name}</td>
+                    <td className='py-2 px-4 border-b border-r border-r-black'>{product.description}</td>
+                    <td className='py-2 px-4 border-b border-r border-r-black'>{product.category}</td>
+                    <td className='py-2 px-4 border-b '>R{product.price}</td>
+                    {/* <td className='py-2 px-4 border-b border-r border-r-black'>{product.price}</td> */}
+                   
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+          </div>
+          
         </div>
       </main>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} customStyles='w-1/4'>
