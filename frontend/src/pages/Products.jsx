@@ -132,7 +132,7 @@ export const Products = ({ products: initialProducts, isAdmin, addToCart, isAuth
                 isAuthenticated && (
                   <div className="flex justify-center m-4">
                     <button
-                      className="bg-green-500 text-white px-4 py-2 rounded"
+                      className="bg-[#8cad20] px-2 py-1 rounded"
                       onClick={() => addToCart(product)}
                     >
                       <MdOutlineAddShoppingCart />

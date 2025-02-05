@@ -11,7 +11,6 @@ const Profile = ({ user }) => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        console.log('Fetching profile for user:', user);
         const config = {
           headers: {
             'Content-Type': 'application/json',
@@ -19,7 +18,6 @@ const Profile = ({ user }) => {
           },
         };
         const { data } = await axios.get('/api/users/profile', config);
-        console.log('Profile data:', data);
         setProfile(data);
         setLoading(false);
       } catch (error) {

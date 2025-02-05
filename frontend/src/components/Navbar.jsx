@@ -10,11 +10,13 @@ import { CiShoppingCart } from "react-icons/ci";
 import Badge from '@material-ui/core/Badge';
 import cart from '../images/cart-1.png';
 import { MdAccountCircle } from 'react-icons/md';
+import Cart from './Cart';
 
 const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleItemClick, togglePopUp, onAddProductClick, cart=[]}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -27,6 +29,10 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
+
+  const toggleCartModal = () => {
+    setIsCartModalOpen(!isCartModalOpen);
+  }
 
   return (
     <nav className="bg-[#494949] p-4 border-b border-yellow-500">
@@ -74,23 +80,14 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
                     </div>
                   )}
                 </li>
-              {/* Button For adding products */}
-              {user.isAdmin && (
-                <li className="relative block mt-4 lg:mt-0 text-white">
-                  <button
-                    className="flex items-center px-3 py-2 rounded-md focus:outline-none"
-                    onClick={onAddProductClick}
-                  >
-                   Add Product
-                  </button>
-                </li>
-              )}
 
               {isAuthenticated && (
                 <li className="block mt-4 lg:mt-0 text-white">
-                  <Badge badgeContent={cart.length} color="primary">
-                    <CiShoppingCart className="text-white" size={24} />
-                  </Badge>
+                  <button onClick={toggleCartModal} className="flex items-center px-3 py-2 rounded-md focus:outline-none">
+                    <Badge badgeContent={cart.length} color="primary">
+                      <CiShoppingCart className="text-white" size={24} />
+                    </Badge>
+                  </button>
                 </li>
               )}
               </>
@@ -108,9 +105,13 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <AddProduct />
       </Modal>
+      <Modal isOpen={isCartModalOpen} onClose={() => setIsCartModalOpen(false)} customStyles="w-1/2">
+        <Cart initialCart={cart} />
+      </Modal>
       
     </nav>
   );
 };
+
 
 export default Navbar;

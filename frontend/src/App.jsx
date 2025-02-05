@@ -26,8 +26,7 @@ const App = () => {
   const [isPopUpVisible, setIsPopUpVisible] = useState(false);
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
-  console.log("🚀 ~ App ~ cart:", cart)
+  const [initialCart, setInitialCart] = useState([]);
 
   const location = useLocation();
   const shouldShowNavbarAndFooter  =! ['/dashboard', '/Settings', '/allProducts', '/allUsers', '/profile'].includes(location.pathname);
@@ -88,7 +87,7 @@ const App = () => {
   };
 
   const addToCart = (product) => {
-    setCart([...cart, product]);
+    setInitialCart([...initialCart, product]);
   };
 
   return (
@@ -101,7 +100,7 @@ const App = () => {
         isPopUpVisible={isPopUpVisible}
         handleItemClick={handleItemClick}
         togglePopUp={togglePopUp}
-        cart={cart}
+        cart={initialCart}
         />
       )}
     <SignIn modalIsOpen={modalIsOpen} onCloseModal={handleCloseModal} onSignIn={handleSignIn} />
@@ -115,7 +114,7 @@ const App = () => {
         <Route path='/logout' element={<Logout onSignOut={handleSignOut} />} />
         <Route path='/products' element={<Products products={products} isAdmin={user?.isAdmin} isAuthenticated={isAuthenticated} addToCart={addToCart}/>} />
         <Route path='/addProduct' element={<AddProduct newAddProduct={newAddProduct} />} />
-        <Route path='/cart' element={<Cart cart={cart} />} />
+        <Route path='/cart' element={<Cart initialCart={initialCart} />} />
         <Route path='/allProducts' element={<AllProducts />} />
         <Route path='/AllUsers' element={<AllUsers />} />
     </Routes>
