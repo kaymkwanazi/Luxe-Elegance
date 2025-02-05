@@ -30,7 +30,7 @@ const App = () => {
   console.log("🚀 ~ App ~ cart:", cart)
 
   const location = useLocation();
-  const shouldShowNavbarAndFooter  =! ['/dashboard', '/Settings', '/allProducts', '/allUsers'].includes(location.pathname);
+  const shouldShowNavbarAndFooter  =! ['/dashboard', '/Settings', '/allProducts', '/allUsers', '/profile'].includes(location.pathname);
 
   useEffect(() => {
     const fetchProducts = async () => {

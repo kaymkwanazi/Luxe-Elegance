@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Sidebar } from '../components/Sidebar';
+import { AdminNavbar } from '../components/AdminNavbar';
 
 const Profile = ({ user }) => {
   const [profile, setProfile] = useState(null);
@@ -47,10 +49,17 @@ const Profile = ({ user }) => {
   }
 
   return (
-    <div className="container mx-auto p-4">
-      <h2 className="text-2xl mb-4">Profile</h2>
-      <p><strong>Name:</strong> {profile.name}</p>
-      <p><strong>Email:</strong> {profile.email}</p>
+    <div className='flex h-screen'>
+      <Sidebar />
+      <main className='flex-1 bg-[#EEDAEA]'>
+        <AdminNavbar />
+        <div className="container mx-auto p-5">
+          <h2 className="text-2xl mb-4">Profile</h2>
+          <p><strong>Name:</strong> {profile.name}</p>
+          <p><strong>Email:</strong> {profile.email}</p>
+          
+        </div>
+      </main>
     </div>
   );
 };
