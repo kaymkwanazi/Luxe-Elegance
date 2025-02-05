@@ -93,7 +93,7 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
               </>
             ) : (
               <li className="block mt-4 lg:mt-0">
-                <button onClick={onSignInClick} className="bg-white border py-1 px-2 text-xs rounded-md font-semibold">
+                <button onClick={onSignInClick} className="border py-2 px-2 text-xs text-white">
                   Sign In
                 </button>
               </li>
@@ -102,9 +102,6 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
           </div>
       </div>
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <AddProduct />
-      </Modal>
       <Modal isOpen={isCartModalOpen} onClose={() => setIsCartModalOpen(false)} customStyles="w-1/2">
         <Cart initialCart={cart} />
       </Modal>

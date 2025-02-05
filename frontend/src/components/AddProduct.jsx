@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import swal from 'sweetalert';
 
+
 const AddProduct = ({ newAddProduct, onClose }) => {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
@@ -117,13 +118,18 @@ const AddProduct = ({ newAddProduct, onClose }) => {
         </div>
         <div>
           <label className="block text-sm font-medium">Category</label>
-          <input
+          <select
             type="text"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"
-            required
-          />
+            required >
+              <option value="">Select a category</option>
+              <option value="earring">Earring</option>
+              <option value="bracelet">Bracelet</option>
+              <option value="necklace">Necklace</option>
+              <option value="watch">Watch</option>
+            </select>         
         </div>
         <button
           type="submit"

@@ -3,11 +3,16 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Sidebar } from '../components/Sidebar';
 import { AdminNavbar } from '../components/AdminNavbar';
+import { useNavigate } from 'react-router-dom';
+import Modal from '../components/Modal';
+import AddProduct from '../components/addProduct';
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [multipleSelected, setMultipleSelected] = useState(false);
+  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -45,7 +50,15 @@ const AllProducts = () => {
         <AdminNavbar />
         {/* Products list */}
         <div className='container mx-auto px-10 py-10'>
-          <h1 className='text-4xl mb-10'>All Products</h1>
+          <div className='flex justify-between'>
+            <h1 className='text-4xl mb-10'>Product Inventory</h1>
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className='bg-blue-500 text-white px-4 py-2 rounded'
+              >
+                Add Product
+              </button>
+          </div>
           <ul className='flex flex-col space-y-4'>
             {products.map(product => (
               <li key={product.id} className='flex items-center'>
@@ -62,6 +75,9 @@ const AllProducts = () => {
           </ul>
         </div>
       </main>
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} customStyles='w-1/4'>
+        <AddProduct />
+      </Modal>
     </div>
   );
 };

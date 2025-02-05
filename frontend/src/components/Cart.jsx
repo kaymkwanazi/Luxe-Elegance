@@ -1,35 +1,35 @@
 import React, { useState } from 'react';
 import { MdDelete } from 'react-icons/md';
-import { FaMinus, FaPlus } from "react-icons/fa";
+import { FaPlus, FaMinus } from 'react-icons/fa';
 
 const Cart = ({ initialCart }) => {
-  const [cart, setCart] = useState(initialCart.map(item => ({ ...item, quantity: 1 })));
+  const [cart, setCart] = useState(initialCart);
 
   const removeItem = (indexToRemove) => {
     setCart(cart.filter((_, index) => index !== indexToRemove));
-  }
+  };
 
   const increaseQuantity = (index) => {
     const newCart = [...cart];
-    newCart[index].quantity++;
+    newCart[index].quantity += 1;
     setCart(newCart);
-  }
+  };
 
   const decreaseQuantity = (index) => {
     const newCart = [...cart];
     if (newCart[index].quantity > 1) {
       newCart[index].quantity -= 1;
       setCart(newCart);
-    }  
+    }
   };
-  
+
   return (
     <div className='container mx-auto px-5 py-5'>
       <h1 className='font-semibold text-xl mb-3'>My Cart</h1>
-        <hr className='mb-3 border-black'></hr>
+      <hr className='mb-3 border-black'></hr>
       <ul className='list-inside'>
         {cart.map((item, index) => (
-            <li key={index} className='flex justify-between items-center mb-2'>
+          <li key={index} className='flex justify-between items-center mb-2'>
             <div className='flex items-center'>
               <img src={item.image} alt={item.name} className='w-16 h-16 object-cover mr-4' />
               <div className='flex flex-col'>
@@ -53,7 +53,7 @@ const Cart = ({ initialCart }) => {
           </li>
         ))}
       </ul>
-  </div>
+    </div>
   );
 };
 
