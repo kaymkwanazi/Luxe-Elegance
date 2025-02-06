@@ -97,9 +97,10 @@ export const Products = ({ products: initialProducts, isAdmin, addToCart, isAuth
 
   return (
     <div className="bg-[#494949] min-h-screen text-white">
-      <h1 className="font-bod text-4xl text-center pt-10">
-        Browse Our Exquisite Jewelry Collection
+      <h1 className="font-carattere text-6xl text-center pt-10">
+       Elevate your Elegance
       </h1>
+      <hr className='mx-auto my-4 w-16 border-t-2 border-[#FFD700] pb-10'></hr>
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-5 mt-10 pb-10">
         {currentItems.map((product) => (
           <div

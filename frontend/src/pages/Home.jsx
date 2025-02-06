@@ -13,18 +13,19 @@ import aboutPic2 from '../images/about2.webp'
 import aboutPic3 from '../images/image.png'
 
 const categories = [
-  {name: 'earrings', image: earrings, description: 'From subtle studs to statement pieces, perfect for any occasion'},
+  {name: 'earring', image: earrings, description: 'From subtle studs to statement pieces, perfect for any occasion'},
   {name: 'bracelet', image: bracelets, description: 'Elegant designs to adorn your wrist with timeless charm'},
   {name: 'necklace', image: necklaces, description: 'Beautifully crafted pendants and chains to complement your style'},
-  {name: 'watches', image: watches, description: 'Stylish timepieces that blend functionality with sophistication'},
+  {name: 'watch', image: watches, description: 'Stylish timepieces that blend functionality with sophistication'},
 ]
 
 const Home = () => {
-  // const history  = useHistory();
   const navigate = useNavigate();
+  
   const handleCategoryClick = (category) => {
     navigate('/products', { state: { category } });
   };
+
   return (
     <>
     {/* Hero section */}
@@ -42,8 +43,8 @@ const Home = () => {
 
       {/* Mid shop section */}
       <div className='bg-[#494949]  text-center pt-10 pb-16'>
-        <h1 className='text-4xl text-white'>Shop by Category</h1>
-        <hr className='mx-auto my-4 w-10 border-t-2 border-[#FFD700] pb-10'></hr>
+        <h1 className='text-6xl text-white font-carattere'>Shop by Category</h1>
+        <hr className='mx-auto my-4 w-16 border-t-2 border-[#FFD700] pb-10'></hr>
         <div className='container mx-auto px-4 grid cols-1 md:grid-cols-4 gap-10'>
           {categories.map((category, index) => (
             <div key={index}  onClick={() => handleCategoryClick(category.name)} className='flex flex-col items-center bg-white text-black rounded-lg shadow-md overflow-hidden cursor-pointer '>

@@ -19,7 +19,7 @@ export const About = () => {
             <div className='container mx-auto px-4 py-10 grid cols-1 md:grid-cols-2'>
                 <div className='flex flex-col items-center justify-center'>
                     <h2 className='text-white font-carattere text-4xl md:text-6xl text-center '>Crafted with Prescicion and Passion</h2>
-                    <hr className='mx-auto my-4 w-10 border-t-2 border-[#FFD700] '></hr>
+                    <hr className='mx-auto my-4 w-16 border-t-2 border-[#FFD700] '></hr>
                     <p className='text-white md:text-xl md:font-light text-center'>
                         At Luxe Elegance, each piece of jewellery is a masterpiece, meticulously handcrafted by skilled artisans who pour their passion and expertise into every detail. 
                         We source only the finest materials, from ethically mined gemstones to premium metals, ensuring that every creation is as sustainable as it is stunning. 

@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../images/logo-luxe.webp';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import AddProduct from './addProduct';
 import Modal from './Modal';
 import { CiShoppingCart } from "react-icons/ci";
 import Badge from '@material-ui/core/Badge';

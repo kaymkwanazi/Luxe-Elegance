@@ -5,7 +5,7 @@ import { Sidebar } from '../components/Sidebar';
 import { AdminNavbar } from '../components/AdminNavbar';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../components/Modal';
-import AddProduct from '../components/addProduct';
+import AddProduct from '../components/AddProduct';
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);

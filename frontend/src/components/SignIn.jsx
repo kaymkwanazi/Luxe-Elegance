@@ -77,10 +77,11 @@ const SignIn = ({ modalIsOpen, onCloseModal, onSignIn }) => {
   };
 
   return (
-    <Modal
+    <Modal 
       isOpen={modalIsOpen}
       onRequestClose={onCloseModal}
       contentLabel="Sign In / Register"
+     
     >
       {isRegistered ? (
       <div className='grid grid-cols-2 gap-4'>

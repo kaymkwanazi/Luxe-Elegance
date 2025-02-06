@@ -11,11 +11,11 @@ export const Settings = () => {
     <div className="min-h-screen flex bg-white dark:bg-gray-900 text-black dark:text-white">  
       <Sidebar />
       <main className='flex-1 bg-[#EEDAEA]'>
-        <div className='container mx-auto px-4 py-10'>
-          <AdminNavbar />
-          <h1 className="text-4xl font-bold mb-5">Settings</h1>
+        <AdminNavbar />
+        <div className='container mx-auto px-10 py-10'>       
+          <h1 className="text-4xl mb-5">Settings</h1>
           {/* <p className='inline'>Switch to dark mode<ToggleMode /></p> */}
-          <Link to='/dashboard' className='text-blue-500'>Go to dashboard</Link>
+          <Link to='/dashboard' className='text-blue-500 hover:text-blue-700'>Go to dashboard</Link>
         </div> 
       </main> 
     </div>

@@ -19,7 +19,7 @@ export const Contact = () => {
         <div className='container mx-auto px-4 grid cols-1 md:grid-cols-2 py-5'>
             <div className='relative mx-10 px-10'>
                 <h2 className='text-white text-4xl font-semibold text-center'>Message Us</h2>
-                <hr className='mx-auto my-4 w-10 border-t-2 border-[#FFD700] '></hr>
+                <hr className='mx-auto my-4 w-16 border-t-2 border-[#FFD700] '></hr>
                 <p className='text-white text-xl font-light text-center pb-10'>
                     Have questions or need assistance? Our team is here to help! Send us a message, and we`ll get back to you as soon as possible
                 </p>
