@@ -5,7 +5,7 @@ import { Sidebar } from '../components/Sidebar';
 import { AdminNavbar } from '../components/AdminNavbar';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../components/Modal';
-import AddProduct from '../components/AddProduct';
+import AddProduct from '../components/addProduct';
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
@@ -55,7 +55,7 @@ const AllProducts = () => {
             <div>
               <button
                   onClick={() => setIsModalOpen(true)}
-                  className='bg-blue-500 text-white p-3 rounded'
+                  className='border border-black hover:bg-slate-300 p-2'
                 >
                   Add Product
               </button>
@@ -63,22 +63,22 @@ const AllProducts = () => {
              
           </div>
           <div>
-          <table className='min-w-full bg-white'>
+          <table className='min-w-full bg-white border border-gray-300 rounded-lg'>
               <thead className='bg-slate-200'>
                 <tr>
-                  <th className='py-2 px-4 border-b border-r border-r-black'>Select</th>
-                  <th className='py-2 px-4 border-b border-r border-r-black'>Product Name</th>
-                  <th className='py-2 px-4 border-b border-r border-r-black'>Description</th>
-                  <th className='py-2 px-4 border-b border-r border-r-black'>Category</th>
-                  <th className='py-2 px-4 border-b'>Price</th>
-                  {/* <th className='py-2 px-4 border-b '>Inventory</th> */}
+                  <th className='py-2 px-4 border border-gray-300'>Select</th>
+                  <th className='py-2 px-4 border border-gray-300'>Product Name</th>
+                  <th className='py-2 px-4 border border-gray-300'>Description</th>
+                  <th className='py-2 px-4 border border-gray-300'>Category</th>
+                  <th className='py-2 px-4 border-b border border-gray-300'>Price</th>
+                  <th className='py-2 px-4 border-b border border-gray-300'>Action</th>
                   
                 </tr>
               </thead>
               <tbody>
                 {products.map(product => (
                   <tr key={product.id}>
-                    <td className='py-2 px-4 border-b border-r border-r-black'>
+                    <td className='py-2 px-4 border border-gray-300'>
                       <div className='flex justify-center items-center'>
                           <input
                             type='checkbox'
@@ -86,11 +86,11 @@ const AllProducts = () => {
                           />
                       </div>
                     </td>
-                    <td className='py-2 px-4 border-b border-r border-r-black'>{product.name}</td>
-                    <td className='py-2 px-4 border-b border-r border-r-black'>{product.description}</td>
-                    <td className='py-2 px-4 border-b border-r border-r-black'>{product.category}</td>
-                    <td className='py-2 px-4 border-b '>R{product.price}</td>
-                    {/* <td className='py-2 px-4 border-b border-r border-r-black'>{product.price}</td> */}
+                    <td className='py-2 px-4 border border-gray-300'>{product.name}</td>
+                    <td className='py-2 px-4 border border-gray-300'>{product.description}</td>
+                    <td className='py-2 px-4 border border-gray-300'>{product.category}</td>
+                    <td className='py-2 px-4 border border-gray-300'>R{product.price}</td>
+                    <td className='py-2 px-4 border-b border-r border border-gray-300'>{product.price}</td>  {/*  //Add actions here */}
                    
                   </tr>
                 ))}
@@ -101,7 +101,7 @@ const AllProducts = () => {
           
         </div>
       </main>
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} customStyles='w-1/4'>
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} customStyles='w-1/2'>
         <AddProduct />
       </Modal>
     </div>

@@ -85,14 +85,14 @@ export const AllUsers = () => {
             />
             <button
               onClick={() => setSearchTerm('')}
-              className='ml-2 px-4 py-2 bg-red-500 text-white rounded-md'
+              className='ml-2 px-4 py-2 border border-black hover:bg-slate-300'
             >
               Clear
             </button>
           </div>
           <div className='overflow-x-auto'>
             <table className='min-w-full bg-white border border-gray-300 rounded-lg shadow-md'>
-              <thead className='bg-gray-100'>
+              <thead className='bg-slate-200'>
                 <tr>
                   <th
                     className='py-2 px-4 border border-gray-300 cursor-pointer'

@@ -122,7 +122,7 @@ const AddProduct = ({ newAddProduct, onClose }) => {
             type="text"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"
+            className="mt-1 mb-2 block w-full border border-gray-300 rounded-md shadow-sm"
             required >
               <option value="">Select a category</option>
               <option value="earring">Earring</option>
