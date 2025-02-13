@@ -33,7 +33,7 @@ const Cart = ({ initialCart }) => {
             <React.Fragment key={index}>
               <li className='flex justify-between items-center mb-2'>
                 <div className='flex items-start'>
-                  <img src={item.image} alt={item.name} className='w-36 object-cover mr-10 ' />
+                  <img src={item.image} alt={item.name} className='w-32 object-cover mr-5' />
                   <div className='flex flex-col'>
                     <span className='font-semibold'>{item.name}</span>
                     <span className='text-gray-600 text-sm'>{item.description}</span>
@@ -53,13 +53,17 @@ const Cart = ({ initialCart }) => {
                     <MdDelete />
                   </button>
                 </div>
+                <div>
+                  <span className='font-semibold'>R{item.price * item.quantity}</span>
+                </div>
               </li>
               {index < cart.length - 1 && <hr className='my-3 border-black' />}
             </React.Fragment>
           ))}
         </ul>
-      </div>    
+      </div>  
     </div>
+    
   );
 };
 
