@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
-import { MdDelete } from 'react-icons/md';
+import React, { useState, useEffect } from 'react';
 import { FaPlus, FaMinus } from 'react-icons/fa';
+import { MdDelete } from 'react-icons/md';
 
 const Cart = ({ initialCart }) => {
-  const [cart, setCart] = useState(initialCart);
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    // Initialize quantity if not set
+    const initializedCart = initialCart.map(item => ({
+      ...item,
+      quantity: item.quantity || 1
+    }));
+
+    setCart(initializedCart);
+  }, [initialCart]);
 
   const removeItem = (indexToRemove) => {
     setCart(cart.filter((_, index) => index !== indexToRemove));
@@ -37,8 +47,7 @@ const Cart = ({ initialCart }) => {
                   <div className='flex flex-col'>
                     <span className='font-semibold'>{item.name}</span>
                     <span className='text-gray-600 text-sm'>{item.description}</span>
-                    <span className='mt-1 font-semibold'>R{item.price}</span>
-                    
+                    <span className='mt-10 font-semibold'>R{item.price.toString()}</span>
                   </div>                
                 </div>        
                 <div className='flex items-center'>
@@ -54,16 +63,17 @@ const Cart = ({ initialCart }) => {
                   </button>
                 </div>
                 <div>
-                  <span className='font-semibold'>R{item.price * item.quantity}</span>
+                  <span className='font-semibold'>
+                    R{!isNaN(Number(item.price)) ? (Number(item.price) * item.quantity).toFixed(2).toString() : '0.00'}
+                  </span>
                 </div>
               </li>
               {index < cart.length - 1 && <hr className='my-3 border-black' />}
             </React.Fragment>
           ))}
         </ul>
-      </div>  
+      </div>
     </div>
-    
   );
 };
 
