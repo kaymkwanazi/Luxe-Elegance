@@ -8,6 +8,8 @@ import { MdDelete, MdDeleteOutline } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { MdOutlineModeEdit , MdOutlineAddShoppingCart} from "react-icons/md";
 import { useLocation } from 'react-router-dom';
+import bgShop from '../images/FIORI.webp'
+import bgAbout from '../images/FIORI.webp';
 
 
 export const Products = ({ products: initialProducts, isAdmin, addToCart, isAuthenticated}) => {
@@ -27,7 +29,7 @@ export const Products = ({ products: initialProducts, isAdmin, addToCart, isAuth
   }, [selectedCategory, initialProducts]);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(6);
+  const [itemsPerPage] = useState(12);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -86,35 +88,36 @@ export const Products = ({ products: initialProducts, isAdmin, addToCart, isAuth
     });
   };
 
-  const handleUpdate = (product) => {
-    setSelectedProduct(product);
-    setIsModalOpen(true);
-  };
-
-  const handleUpdateProduct = (updatedProduct) => {
-    setProducts(products.map(p => p._id === updatedProduct._id ? updatedProduct : p));
-  };
-
   return (
-    <div className="bg-[#494949] min-h-screen text-white">
+  <>
+     <div className='min-h-96 bg-cover bg-center relative flex items-center justify-center' style={{backgroundImage: `url(${bgShop})`}}>
+            <div className='absolute inset-0 bg-black opacity-40'></div>
+            <div className='relative z-10 text-center'>
+            <h1 className='text-6xl text-white'>Shop</h1>
+            </div>
+      </div>
+    <div className="bg-[#808080] min-h-screen text-white">
       <h1 className="font-carattere text-6xl text-center pt-10">
        Elevate your Elegance
       </h1>
-      <hr className='mx-auto my-4 w-16 border-t-2 border-[#FFD700] pb-10'></hr>
-      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-5 mt-10 pb-10">
+      <hr className='mx-auto my-4 w-16 border-t-2 border-[#FFD700] pb-5'></hr>
+      <div className="container mx-auto px-4 flex flex-wrap justify-center gap-8 pb-5">
         {currentItems.map((product) => (
           <div
             key={product._id}
-            className="rounded-lg w-52 shadow-md overflow-hidden cursor-pointer"
+            className="rounded-2xl w-52 shadow-md overflow-hidden cursor-pointer bg-slate-100 text-black"
           >
             <img
               src={product.image}
               alt={product.name}
               className="object-cover w-52 h-52 transform transition duration-300 hover:scale-110"
             />
-            <h4 className="text-lg font-bold mt-10 m-2">{product.name}</h4>
-            <p className="m-4">R{product.price}</p>
-              {isAdmin ? (
+            <div className="flex flex-col items-center m-5">
+              <h4 className="text-md ">{product.name}</h4>
+              <p className="font-bold">R{product.price}</p>
+            </div>
+           
+              {/* {isAdmin ? (
                 <div className="flex justify-between m-4">
                   <button
                     className="bg-red-500 text-white px-4 py-2 rounded"
@@ -129,37 +132,33 @@ export const Products = ({ products: initialProducts, isAdmin, addToCart, isAuth
                     <MdOutlineModeEdit />
                   </button>
                 </div>
-              ) : (
-                isAuthenticated && (
+              ) : ( */}
+                {isAuthenticated && (
                   <div className="flex justify-center m-4">
-                    <button
+                    {/* <button
                       className="bg-[#8cad20] px-2 py-1 rounded"
                       onClick={() => addToCart(product)}
                     >
                       <MdOutlineAddShoppingCart />
-                    </button>
+                    </button> */}
                   </div>
-                )
-              )}
+                )}
           </div>
         ))}
       </div>
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center">
         {pageNumbers.map((number) => (
           <button
             key={number}
             onClick={() => setCurrentPage(number)}
-            className="mx-1 px-3 py-1 mb-5 bg-blue-500 rounded-lg text-white"
+            className="mx-1 px-2 py-1 mb-5 rounded-lg text-white"
           >
             {number}
           </button>
         ))}
       </div>
-
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <UpdateProduct product={selectedProduct} onUpdateProduct={handleUpdateProduct} onClose={() => setIsModalOpen(false)} />
-      </Modal>
     </div>
+  </>
   );
 };
 

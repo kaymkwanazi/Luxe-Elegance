@@ -34,7 +34,7 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
   }
 
   return (
-    <nav className="bg-[#494949] p-4 border-b border-yellow-500">
+    <nav className="p-4 border-b border-yellow-500 absolute top-0 left-0 w-full z-50">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <Link to="/" className="text-white px-3 py-2 pl-10 rounded-md text-sm font-medium italic"><img src={logo} width={50} className='rounded-full'></img></Link>
