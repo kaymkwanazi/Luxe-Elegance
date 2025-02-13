@@ -135,12 +135,13 @@ export const Products = ({ products: initialProducts, isAdmin, addToCart, isAuth
               ) : ( */}
                 {isAuthenticated && (
                   <div className="flex justify-center m-4">
-                    {/* <button
-                      className="bg-[#8cad20] px-2 py-1 rounded"
+                    <button
+                      className="bg-[#bca522] px-10 py-1 rounded text-white"
                       onClick={() => addToCart(product)}
                     >
-                      <MdOutlineAddShoppingCart />
-                    </button> */}
+                      Add to cart
+                      {/* <MdOutlineAddShoppingCart /> */}
+                    </button>
                   </div>
                 )}
           </div>
