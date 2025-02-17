@@ -7,13 +7,14 @@ import UpdateProduct from '../components/UpdateProduct';
 import { MdDelete, MdDeleteOutline } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { MdOutlineModeEdit , MdOutlineAddShoppingCart} from "react-icons/md";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import bgShop from '../images/FIORI.webp'
 import bgAbout from '../images/FIORI.webp';
 
 
 export const Products = ({ products: initialProducts, isAdmin, addToCart, isAuthenticated}) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const selectedCategory = location.state?.category || '';
 
   const [products, setProducts] = useState(
@@ -41,52 +42,9 @@ export const Products = ({ products: initialProducts, isAdmin, addToCart, isAuth
     pageNumbers.push(i);
   }
 
-  const handleDelete = (product) => {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: `You are about to delete ${product.name}`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const token = localStorage.getItem('token');
-        fetch(`http://localhost:5000/api/products/${product._id}`, { 
-          method: 'DELETE',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-          },
-        })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          setProducts(products.filter(p => p._id !== product._id));
-          Swal.fire(
-            'Deleted!',
-            `${product.name} has been deleted.`,
-            'success'
-          );
-        } else {
-          Swal.fire(
-            'Error!',
-            `There was a problem deleting the product: ${data.message}`,
-            'error'
-          );
-        }
-      })
-      .catch(error => {
-        console.error('Error deleting product:', error);
-        Swal.fire(
-          'Error!',
-          'There was a problem deleting the product.',
-          'error'
-        );
-      });
-      }
-    });
-  };
+  const handleViewProduct = (product) => {
+    navigate(`/product/${product._id}`);
+  }
 
   return (
   <>
@@ -110,29 +68,14 @@ export const Products = ({ products: initialProducts, isAdmin, addToCart, isAuth
             <img
               src={product.image}
               alt={product.name}
+              onClick={handleViewProduct.bind(this, product)}
               className="object-cover w-52 h-52 transform transition duration-300 hover:scale-110"
             />
             <div className="flex flex-col items-center m-5">
               <h4 className="text-md ">{product.name}</h4>
               <p className="font-bold">R{product.price}</p>
             </div>
-           
-              {/* {isAdmin ? (
-                <div className="flex justify-between m-4">
-                  <button
-                    className="bg-red-500 text-white px-4 py-2 rounded"
-                    onClick={() => handleDelete(product)}
-                  >
-                    <RiDeleteBin6Line />
-                  </button>
-                  <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded ml-2"
-                    onClick={() => handleUpdate(product)}
-                  >
-                    <MdOutlineModeEdit />
-                  </button>
-                </div>
-              ) : ( */}
+        
                 {isAuthenticated && (
                   <div className="flex justify-center m-4">
                     <button
@@ -140,7 +83,6 @@ export const Products = ({ products: initialProducts, isAdmin, addToCart, isAuth
                       onClick={() => addToCart(product)}
                     >
                       Add to cart
-                      {/* <MdOutlineAddShoppingCart /> */}
                     </button>
                   </div>
                 )}

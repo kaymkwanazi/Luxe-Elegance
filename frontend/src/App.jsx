@@ -17,7 +17,7 @@ import { Contact } from './pages/Contact';
 import { AdminDashboard } from './pages/AdminDashboard';
 import AllProducts from './pages/AllProducts';
 import AllUsers from './pages/AllUsers';
-// import { Checkout } from './components/Checkout';
+
 
 
 const App = () => {
@@ -118,7 +118,7 @@ const App = () => {
         <Route path='/cart' element={<Cart initialCart={initialCart} />} />
         <Route path='/allProducts' element={<AllProducts />} />
         <Route path='/AllUsers' element={<AllUsers />} />
-        {/* <Route path='/checkout' element={<Checkout />} /> */}
+        <Route path='/view' element={<Products products={products} isAdmin={user?.isAdmin} isAuthenticated={isAuthenticated} addToCart={addToCart}/>} />
         
     </Routes>
     {shouldShowNavbarAndFooter && <Footer />}
