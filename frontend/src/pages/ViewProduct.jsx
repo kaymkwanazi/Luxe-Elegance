@@ -55,7 +55,7 @@ export const ViewProduct = ({ isAuthenticated, addToCart }) => {
                         <p className='text-sm'>{product.description}</p>  
                         <hr className='my-5 border-[#FFD700]'/>  
                         {isAuthenticated && (
-                        <div className="flex justify-center m-4">
+                        <div className="flex justify-center pt-10">
                             <button
                             className="bg-[#bca522] px-10 py-1 rounded text-white"
                             onClick={() => addToCart(product)}

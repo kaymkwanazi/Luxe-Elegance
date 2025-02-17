@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
-import { Link } from 'react-router-dom';
 import CheckoutModal from './CheckoutModal';
 
 const Cart = ({ initialCart }) => {
