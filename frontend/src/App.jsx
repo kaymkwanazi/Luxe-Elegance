@@ -119,7 +119,7 @@ const App = () => {
         <Route path='/cart' element={<Cart initialCart={initialCart} />} />
         <Route path='/allProducts' element={<AllProducts />} />
         <Route path='/AllUsers' element={<AllUsers />} />
-        <Route path='/products/:id' element={<ViewProduct/>} />
+        <Route path='/products/:id' element={<ViewProduct isAuthenticated={isAuthenticated} addToCart={addToCart}/>} />
         
     </Routes>
     {shouldShowNavbarAndFooter && <Footer />}

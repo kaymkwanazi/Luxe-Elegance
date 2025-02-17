@@ -26,6 +26,8 @@ export const ViewProduct = ({ isAuthenticated, addToCart }) => {
         fetchProduct();
     }, [id]);
 
+    console.log('isAuthenticated', isAuthenticated);
+
     if (loading) {
         return <p>Loading...</p>
     }
@@ -53,15 +55,15 @@ export const ViewProduct = ({ isAuthenticated, addToCart }) => {
                         <p className='text-sm'>{product.description}</p>  
                         <hr className='my-5 border-[#FFD700]'/>  
                         {isAuthenticated && (
-                  <div className="flex justify-center m-4">
-                    <button
-                      className="bg-[#bca522] px-10 py-1 rounded text-white"
-                      onClick={() => addToCart(product)}
-                    >
-                      Add to cart
-                    </button>
-                  </div>
-                )}
+                        <div className="flex justify-center m-4">
+                            <button
+                            className="bg-[#bca522] px-10 py-1 rounded text-white"
+                            onClick={() => addToCart(product)}
+                            >
+                            Add to cart
+                            </button>
+                        </div>
+                        )}
                     </div>
                 </div>
             </div>
