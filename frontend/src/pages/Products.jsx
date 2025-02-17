@@ -12,7 +12,7 @@ import bgShop from '../images/FIORI.webp'
 import bgAbout from '../images/FIORI.webp';
 
 
-export const Products = ({ products: initialProducts, isAdmin, addToCart, isAuthenticated}) => {
+export const Products = ({ products: initialProducts,  addToCart, isAuthenticated}) => {
   const location = useLocation();
   const navigate = useNavigate();
   const selectedCategory = location.state?.category || '';
@@ -43,7 +43,7 @@ export const Products = ({ products: initialProducts, isAdmin, addToCart, isAuth
   }
 
   const handleViewProduct = (product) => {
-    navigate(`/product/${product._id}`);
+    navigate(`/products/${product._id}`);
   }
 
   return (
