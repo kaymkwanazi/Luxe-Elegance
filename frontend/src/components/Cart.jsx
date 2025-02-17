@@ -44,10 +44,10 @@ const handleCloseCheckoutModal = () => {
   }
 
   return (
-    <div className='container mx-auto px-5 py-5'>
+    <div className='container mx-auto px-5'>
       <h1 className='text-xl md:text-3xl mb-3 text-center'>My Cart</h1>
       <hr className='mb-3 border-black'></hr>
-      <div className='overflow-y-auto max-h-96'>
+      <div className='overflow-y-auto max-h-80'>
         <ul className='list-inside'>
           {cart.map((item, index) => (
             <React.Fragment key={index}>
@@ -78,12 +78,12 @@ const handleCloseCheckoutModal = () => {
                   </span>
                 </div>
               </li>
-              {index < cart.length - 1 && <hr className='my-3 border-black' />}
+              {index < cart.length - 1 && <hr className='my-5 border-black' />}
             </React.Fragment>
           ))}
         </ul>
       </div>
-      <div className='flex justify-end mt-5'>
+      <div className='flex justify-end mt-2'>
           <button 
             type='button'
             className='bg-[#2327FF] text-white px-7 py-1 rounded-lg'
@@ -92,7 +92,7 @@ const handleCloseCheckoutModal = () => {
               Checkout
           </button>     
       </div>
-      <CheckoutModal isOpen={isCheckoutModalOpen} onClose={handleCloseCheckoutModal} />
+      <CheckoutModal isOpen={isCheckoutModalOpen} onClose={handleCloseCheckoutModal} cart={cart}/>
     </div>
   );
 };
