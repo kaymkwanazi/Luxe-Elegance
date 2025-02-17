@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../images/logo-luxe.webp';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import Modal from './Modal';
@@ -16,6 +16,7 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -31,6 +32,11 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
 
   const toggleCartModal = () => {
     setIsCartModalOpen(!isCartModalOpen);
+  }
+
+  const handleContinueShopping = () => {
+    setIsCartModalOpen(false);
+    navigate('/products');
   }
 
   return (
@@ -102,8 +108,18 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
           </div>
       </div>
 
-      <Modal isOpen={isCartModalOpen} onClose={() => setIsCartModalOpen(false)} customStyles="w-1/2">
-        <Cart initialCart={cart} />
+      <Modal isOpen={isCartModalOpen} onClose={() => setIsCartModalOpen(false)} customStyles="w-1/3 h-1/2">
+        {cart.length === 0 ? (
+          <div className='text-center my-10'>
+            <p className='text-3xl mb- font-bold'>Your cart is empty</p>
+            <p className='text-3xl mb-5 font-bold'>Let's start a new order!</p>
+            <div className='flex justify-center mt-10'>
+              <button onClick={handleContinueShopping} className="bg-blue-500 rounded-full px-4 py-2 text-white">Continue shopping</button>
+            </div>
+          </div>
+        ) : (
+          <Cart initialCart={cart} />
+        )}
       </Modal>
       
     </nav>

@@ -17,7 +17,7 @@ import { Contact } from './pages/Contact';
 import { AdminDashboard } from './pages/AdminDashboard';
 import AllProducts from './pages/AllProducts';
 import AllUsers from './pages/AllUsers';
-import { Checkout } from './components/Checkout';
+// import { Checkout } from './components/Checkout';
 
 
 const App = () => {
