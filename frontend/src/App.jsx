@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -18,8 +17,6 @@ import { AdminDashboard } from './pages/AdminDashboard';
 import AllProducts from './pages/AllProducts';
 import AllUsers from './pages/AllUsers';
 import { ViewProduct } from './pages/ViewProduct';
-
-
 
 const App = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -89,7 +86,18 @@ const App = () => {
   };
 
   const addToCart = (product) => {
-    setInitialCart([...initialCart, product]);
+    const existingProductIndex = initialCart.findIndex(item => item._id === product._id);
+    if (existingProductIndex !== -1) {
+      const newCart = [...initialCart];
+      newCart[existingProductIndex].quantity += 1;
+      setInitialCart(newCart);
+    } else {
+      setInitialCart([...initialCart, { ...product, quantity: 1 }]);
+    }
+  };
+
+  const updateCart = (newCart) => {
+    setInitialCart(newCart);
   };
 
   return (
@@ -103,6 +111,7 @@ const App = () => {
         handleItemClick={handleItemClick}
         togglePopUp={togglePopUp}
         cart={initialCart}
+        updateCart={updateCart}
         />
       )}
     <SignIn modalIsOpen={modalIsOpen} onCloseModal={handleCloseModal} onSignIn={handleSignIn} />
@@ -116,7 +125,7 @@ const App = () => {
         <Route path='/logout' element={<Logout onSignOut={handleSignOut} />} />
         <Route path='/products' element={<Products products={products} isAdmin={user?.isAdmin} isAuthenticated={isAuthenticated} addToCart={addToCart}/>} />
         <Route path='/addProduct' element={<AddProduct newAddProduct={newAddProduct} />} />
-        <Route path='/cart' element={<Cart initialCart={initialCart} />} />
+        <Route path='/cart' element={<Cart initialCart={initialCart} updateCart={updateCart} />} />
         <Route path='/allProducts' element={<AllProducts />} />
         <Route path='/AllUsers' element={<AllUsers />} />
         <Route path='/products/:id' element={<ViewProduct isAuthenticated={isAuthenticated} addToCart={addToCart}/>} />

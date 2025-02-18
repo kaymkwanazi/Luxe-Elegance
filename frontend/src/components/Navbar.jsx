@@ -11,7 +11,7 @@ import cart from '../images/cart-1.png';
 import { MdAccountCircle } from 'react-icons/md';
 import Cart from './Cart';
 
-const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleItemClick, togglePopUp, onAddProductClick, cart=[]}) => {
+const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleItemClick, togglePopUp, onAddProductClick, cart=[], updateCart }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -118,7 +118,7 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
             </div>
           </div>
         ) : (
-          <Cart initialCart={cart} />
+          <Cart initialCart={cart} updateCart={updateCart} />
         )}
       </Modal>
       

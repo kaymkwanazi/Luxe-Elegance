@@ -3,28 +3,29 @@ import { FaPlus, FaMinus } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 import CheckoutModal from './CheckoutModal';
 
-const Cart = ({ initialCart }) => {
+const Cart = ({ initialCart, updateCart }) => {
   const [cart, setCart] = useState([]);
   const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
 
   useEffect(() => {
-    // Initialize quantity if not set
     const initializedCart = initialCart.map(item => ({
       ...item,
       quantity: item.quantity || 1
     }));
-
     setCart(initializedCart);
   }, [initialCart]);
 
   const removeItem = (indexToRemove) => {
-    setCart(cart.filter((_, index) => index !== indexToRemove));
+    const newCart = cart.filter((_, index) => index !== indexToRemove);
+    setCart(newCart);
+    updateCart(newCart); // Update the initialCart state in App.jsx
   };
 
   const increaseQuantity = (index) => {
     const newCart = [...cart];
     newCart[index].quantity += 1;
     setCart(newCart);
+    updateCart(newCart); // Update the initialCart state in App.jsx
   };
 
   const decreaseQuantity = (index) => {
@@ -32,13 +33,15 @@ const Cart = ({ initialCart }) => {
     if (newCart[index].quantity > 1) {
       newCart[index].quantity -= 1;
       setCart(newCart);
+      updateCart(newCart); // Update the initialCart state in App.jsx
     }
   };
 
   const handleCheckout = () => {
     setIsCheckoutModalOpen(true);
   }
-const handleCloseCheckoutModal = () => {
+
+  const handleCloseCheckoutModal = () => {
     setIsCheckoutModalOpen(false);
   }
 
