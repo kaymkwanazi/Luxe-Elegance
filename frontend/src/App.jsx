@@ -29,7 +29,7 @@ const App = () => {
   const [initialCart, setInitialCart] = useState([]);
 
   const location = useLocation();
-  const shouldShowNavbarAndFooter  =! ['/dashboard', '/Settings', '/allProducts', '/allUsers', '/profile'].includes(location.pathname);
+  const shouldShowNavbarAndFooter = !['/dashboard', '/Settings', '/allProducts', '/allUsers', '/profile'].includes(location.pathname) && !modalIsOpen;
 
   useEffect(() => {
     const fetchProducts = async () => {

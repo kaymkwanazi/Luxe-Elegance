@@ -53,7 +53,7 @@ export const ViewProduct = ({ isAuthenticated, addToCart }) => {
           console.log("All products:", allProducts);
           const filteredProducts = allProducts.filter((p) => {
             console.log("Checking product:", p);
-            return p.category === product.category && p.id !== product.id
+            return p.category === product.category && p._id !== product.id
         }).slice(0, 3); // Limit to 3 items
           console.log("Filtered related products:", filteredProducts);
           setRelatedProducts(filteredProducts);
@@ -85,7 +85,7 @@ export const ViewProduct = ({ isAuthenticated, addToCart }) => {
     return (
         <>
         <div className='bg-[#494949] min-h-screen text-white flex '>
-            <div className='container mx-auto px-5 flex flex-col my-44'>
+            <div className='container mx-auto px-5 flex flex-col my-20 pt-20'>
                 <div className='grid cols-1 md:grid-cols-2'>
                     <div className='flex justify-center items-center'>
                         <img src={product.image} alt={product.name} className='object-cover w-full h-[500px] md:w-[600px] rounded-2xl '/>
@@ -110,28 +110,28 @@ export const ViewProduct = ({ isAuthenticated, addToCart }) => {
                 </div>
 
                 <div className='container mx-auto px-16 pt-16'>
-        <h1 className='text-2xl md:text-4xl'>You may also like</h1>
-        <p className='pt-3'>Make every day special with high quality jewellery</p>
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 pt-5'>
-          {relatedProducts.length > 0 ? (
-            relatedProducts.map((relatedProduct, index) => (
-              <div key={index} className='bg-white text-black p-5 rounded-lg'>
-                <img src={relatedProduct.image} alt={relatedProduct.name} className='object-cover w-full h-48 rounded-lg'/>
-                <h2 className='text-xl mt-2'>{relatedProduct.name}</h2>
-                <p className='text-lg font-bold'>R{relatedProduct.price}</p>
-                <button
-                  className="bg-[#bca522] px-5 py-1 mt-2 rounded text-white"
-                  onClick={() => addToCart(relatedProduct)}
-                >
-                  Add to cart
-                </button>
-              </div>
-            ))
-          ) : (
-            <p>No related products found.</p>
-          )}
-        </div>
-      </div>
+                    <h1 className='text-2xl md:text-4xl'>You may also like</h1>
+                    <p className='py-5 text-lg'>Make every day special with high quality jewellery</p>
+                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 pt-5'>
+                    {relatedProducts.length > 0 ? (
+                        relatedProducts.map((relatedProduct, index) => (
+                        <div key={index} className='border border-white text-white p-5 rounded-lg h-full'>
+                            <img src={relatedProduct.image} alt={relatedProduct.name} className='object-cover w-full h-96 rounded-lg'/>
+                            <h2 className='text-xl mt-5'>{relatedProduct.name}</h2>
+                            <p className='text-lg font-bold'>R{relatedProduct.price}</p>
+                            <button
+                            className="bg-[#bca522] px-5 py-1 my-5 rounded text-white"
+                            onClick={() => addToCart(relatedProduct)}
+                            >
+                            Add to cart
+                            </button>
+                        </div>
+                        ))
+                    ) : (
+                        <p>No related products found.</p>
+                    )}
+                    </div>
+                </div>
             </div>
         </div>
         </>

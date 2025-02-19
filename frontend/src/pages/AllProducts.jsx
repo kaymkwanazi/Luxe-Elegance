@@ -6,7 +6,7 @@ import { AdminNavbar } from '../components/AdminNavbar';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../components/Modal';
 import AddProduct from '../components/addProduct';
-import Swal from 'sweetalert';
+import Swal from 'sweetalert2';
 import UpdateProduct from '../components/UpdateProduct';
 
 const AllProducts = () => {
