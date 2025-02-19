@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
@@ -46,10 +47,10 @@ const Cart = ({ initialCart, updateCart }) => {
   }
 
   return (
-    <div className='container mx-auto px-5'>
+    <div className='container mx-auto px-5 flex flex-col h-full'>
       <h1 className='text-xl md:text-3xl mb-3 text-center'>My Cart</h1>
       <hr className='mb-3 border-black'></hr>
-      <div className='overflow-y-auto max-h-80'>
+      <div className='flex-grow overflow-y-auto max-h-80'>
         <ul className='list-inside'>
           {cart.map((item, index) => (
             <React.Fragment key={index}>

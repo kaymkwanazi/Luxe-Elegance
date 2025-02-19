@@ -42,7 +42,7 @@ const Home = () => {
       </div>
 
       {/* Mid shop section */}
-      <div className='bg-[#494949]  text-center pt-10 pb-16'>
+      <div className='bg-[#5c5c5c]  text-center pt-10 pb-16'>
         <h1 className='text-6xl text-white font-carattere'>Shop by Category</h1>
         <hr className='mx-auto my-4 w-16 border-t-2 border-[#FFD700] pb-10'></hr>
         <div className='container mx-auto px-4 grid cols-1 md:grid-cols-4 gap-10'>
