@@ -28,7 +28,6 @@ const AllProducts = () => {
   for (let i = 1; i <= Math.ceil(products.length / itemsPerPage); i++) {
     pageNumbers.push(i);
   }
-
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -195,9 +194,10 @@ const AllProducts = () => {
             </table>
 
           </div>
-            <div className='flex justify-center gap-5'>
+            <div className='flex justify-center pt-3'>
               {pageNumbers.map(number => (
-                <button key={number} onClick={() => handlePageChange(number)}>
+                <button key={number} onClick={() => handlePageChange(number)}
+                className='py-2 px-3 leading-tight border border-gray-300 bg-white hover:bg-gray-100 hover:text-gray-700'>
                   {number}
                 </button>
               ))}

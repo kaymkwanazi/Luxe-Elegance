@@ -84,7 +84,7 @@ export const Sidebar = () => {
                 </NavLink>
             </nav>
             <div className='mt-auto py-10'>
-                <button className='px-5 py-2 border hover:bg-[#333333] text-sm mt-4'
+                <button className='px-5 py-2 border hover:bg-gray-700 text-sm mt-4 font-semibold'
                 onClick={handleLogout}>Logout</button>
             </div>      
         </aside>
