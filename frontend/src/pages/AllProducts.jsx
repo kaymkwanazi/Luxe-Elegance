@@ -18,12 +18,12 @@ const AllProducts = () => {
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(6);
-
+  const [itemsPerPage] = useState(10);
 
   const lastItem = currentPage * itemsPerPage;
   const firstItem = lastItem - itemsPerPage;
   const currentItems = products.slice(firstItem, lastItem);
+
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(products.length / itemsPerPage); i++) {
     pageNumbers.push(i);
@@ -59,6 +59,13 @@ const AllProducts = () => {
     setIsAddModalOpen(true);
     setIsUpdateModalOpen(false);
   };
+  const newAddProduct = (product) => {
+    setProducts((prevProducts) => [...prevProducts, product]);
+  };
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  }
 
   const handleDelete = (product) => {
     Swal.fire({
@@ -157,14 +164,14 @@ const AllProducts = () => {
                 </tr>
               </thead>
               <tbody>
-                {products.map(product => (
-                  <tr key={product.id}>
+                {currentItems.map(product => (
+                  <tr key={product._id}>
                     <td className='py-2 px-4 border border-gray-300'>
                       <div className='flex justify-center items-center'>
-                          <input
-                            type='checkbox'
-                            onChange={() => handleCheckboxChange(product._id)}
-                          />
+                        <input
+                          type='checkbox'
+                          onChange={() => handleCheckboxChange(product._id)}
+                        />
                       </div>
                     </td>
                     <td className='py-2 px-4 border border-gray-300'>{product.name}</td>
@@ -173,28 +180,24 @@ const AllProducts = () => {
                     <td className='py-2 px-4 border border-gray-300'>R{product.price}</td>
                     <td className='py-2 px-4 border-b border-r border border-gray-300'>
                       <div className='flex justify-center items-center'>
-                          <button onClick={() => handleUpdate(product)} className='text-blue-500 mx-2'>
-                              <i className='fas fa-edit'></i>
-                          </button>
-                          <button onClick={() => handleDelete(product)} className='text-red-500 mx-2'>
-                            <i className='fas fa-trash'></i>
-                          </button>
+                        <button onClick={() => handleUpdate(product)} className='text-blue-500 mx-2'>
+                          <i className='fas fa-edit'></i>
+                        </button>
+                        <button onClick={() => handleDelete(product)} className='text-red-500 mx-2'>
+                          <i className='fas fa-trash'></i>
+                        </button>
                       </div>
-                      </td>  
-                   
+                    </td>  
                   </tr>
                 ))}
               </tbody>
+
             </table>
 
           </div>
-          <div className="flex justify-center">
-              {pageNumbers.map((number) => (
-                <button
-                  key={number}
-                  onClick={() => setCurrentPage(number)}
-                  className="gap-2"
-                >
+            <div className='flex justify-center gap-5'>
+              {pageNumbers.map(number => (
+                <button key={number} onClick={() => handlePageChange(number)}>
                   {number}
                 </button>
               ))}
@@ -203,7 +206,7 @@ const AllProducts = () => {
       </main>
       {isAddModalOpen && (
         <Modal isOpen={isAddModalOpen} onClose={() => setIsAddModalOpen(false)} customStyles='w-1/2'>
-          <AddProduct />
+          <AddProduct newAddProduct={newAddProduct} />
         </Modal>
       )}
       {isUpdateModalOpen && (

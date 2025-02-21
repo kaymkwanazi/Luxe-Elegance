@@ -42,10 +42,46 @@ export const Sidebar = () => {
                 <img src={logo} alt='logo' className='rounded-full' width={52}/>
             </div>
             <nav className='text-white flex-grow flex flex-col items-center py-28 space-y-5'>
-                <NavLink to='/dashboard' className='block py-2 px-4 hover:bg-[#333333] hover:border hover:border-white' activeClassName='bg-[#333333] border border-white'>Dashboard</NavLink>
-                <NavLink to='/allProducts' className='block py-2 px-4 hover:bg-[#333333] hover:border hover:border-white' activeClassName='bg-[#333333] border border-white'>Products</NavLink>
-                <NavLink to='/allUsers' className='block py-2 px-4 hover:bg-[#333333] hover:border hover:border-white' activeClassName='bg-[#333333] border border-white'>Users</NavLink>
-                <NavLink to='/Settings' className='block py-2 px-4 hover:bg-[#333333] hover:border hover:border-white' activeClassName='bg-[#333333] border border-white'>Settings</NavLink>
+            <NavLink
+                    to="/dashboard"
+                    className={({ isActive }) =>
+                        isActive
+                            ? 'nav-link px-4 py-2 my-2 bg-gray-700 border border-gray-600 rounded'
+                            : 'nav-link px-4 py-2 my-2 hover:bg-gray-700 hover:border-gray-600 border border-transparent rounded'
+                    }
+                >
+                    Dashboard
+                </NavLink>
+                <NavLink
+                    to="/allProducts"
+                    className={({ isActive }) =>
+                        isActive
+                            ? 'nav-link px-4 py-2 my-2 bg-gray-700 border border-gray-600 rounded'
+                            : 'nav-link px-4 py-2 my-2 hover:bg-gray-700 hover:border-gray-600 border border-transparent rounded'
+                    }
+                >
+                    Products
+                </NavLink>
+                <NavLink
+                    to="/allUsers"
+                    className={({ isActive }) =>
+                        isActive
+                            ? 'nav-link px-4 py-2 my-2 bg-gray-700 border border-gray-600 rounded'
+                            : 'nav-link px-4 py-2 my-2 hover:bg-gray-700 hover:border-gray-600 border border-transparent rounded'
+                    }
+                >
+                    Users
+                </NavLink>
+                <NavLink
+                    to="/Settings"
+                    className={({ isActive }) =>
+                        isActive
+                            ? 'nav-link px-4 py-2 my-2 bg-gray-700 border border-gray-600 rounded'
+                            : 'nav-link px-4 py-2 my-2 hover:bg-gray-700 hover:border-gray-600 border border-transparent rounded'
+                    }
+                >
+                    Settings
+                </NavLink>
             </nav>
             <div className='mt-auto py-10'>
                 <button className='px-5 py-2 border hover:bg-[#333333] text-sm mt-4'
