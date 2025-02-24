@@ -35,6 +35,8 @@ export const AdminNavbar = () => {
     };
     fetchAdminDetails();
 }, []);
+
+
   return (
     <header>
         <div className='container mx-auto px-16 py-5 flex justify-between items-center mb-6'>

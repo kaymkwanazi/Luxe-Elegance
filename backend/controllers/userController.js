@@ -98,11 +98,22 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-// Update profile
-const updateUserProfile = asyncHandler(async (req, res) => {
+// Update user profile
+//ROUTE - PUT /api/users/:id
+//@access private
+const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
   if (user) {
+     // Check if the new email already exists in the database
+    if (req.body.email && req.body.email !== user.email) {
+      const emailExists = await User.findOne({ email: req.body.email });
+      if (emailExists) {
+        res.status(400);
+        throw new Error('Email already exists');
+      }
+    }
+
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
     // Add other fields to update as needed
@@ -146,4 +157,25 @@ const updateUserToAdmin = asyncHandler(async (req, res) => {
 
 });
 
-export { authUser, registerUser,logoutUser, getUserProfile, updateUserProfile, updateUserToAdmin, getUsers };
+//Delete user
+//ROUTE - DELETE /api/users/:id
+//@access private/admin
+const deleteUser = asyncHandler(async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    console.log("🚀 ~ deleteUser ~ user:", user);
+    if (user) {
+      await user.remove();
+      res.json({ message: 'User removed' });
+    }
+    else {
+      res.status(404);
+      throw new Error('User not found');
+    }
+  } catch (error) {
+    console.error('Error deleting user:', error.message);
+    res.status(500).json({ success: false, message: 'Server error', error: error.message });
+  } 
+});
+
+export { authUser, registerUser,logoutUser, getUserProfile, updateUser, updateUserToAdmin, getUsers, deleteUser };

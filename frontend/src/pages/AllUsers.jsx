@@ -3,12 +3,19 @@ import React, { useState, useEffect } from 'react';
 import { Sidebar } from '../components/Sidebar';
 import { AdminNavbar } from '../components/AdminNavbar';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import Modal from 'react-modal';
+import UpdateUser from '../components/UpdateUser';
+
+Modal.setAppElement('#root');
 
 export const AllUsers = () => {
   const [allUsers, setAllUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const usersPerPage = 10;
 
   // Fetch all users from the server
@@ -66,6 +73,67 @@ export const AllUsers = () => {
     setSortConfig({ key, direction });
   };
 
+  const handleDelete = (user) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `You are about to delete ${user.name}`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const token = localStorage.getItem('token');
+        fetch(`http://localhost:5000/api/users/${user._id}`, { 
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (data.message === 'User removed') {
+            setAllUsers(allUsers.filter(u => u._id !== user._id));
+            Swal.fire(
+              'Deleted!',
+              `${user.name} has been deleted.`,
+              'success'
+            );
+          } else {
+            Swal.fire(
+              'Error!',
+              `There was a problem deleting the user: ${data.message}`,
+              'error'
+            );
+          }
+        })
+        .catch(error => {
+          Swal.fire(
+            'Error!',
+            `There was a problem deleting the user: ${error.message}`,
+            'error'
+          );
+        });
+      }
+    });
+  };
+
+  const handleUpdate = (user) => {
+    setSelectedUser(user);
+    setIsUpdateModalOpen(true);
+  };
+
+  const handleUpdateUser = (updatedUser) => {
+    setAllUsers(allUsers.map(u => u._id === updatedUser._id ? updatedUser : u));
+    setIsUpdateModalOpen(false);
+  };
+
   return (
     <div className='flex h-screen'>
       <Sidebar />
@@ -111,10 +179,19 @@ export const AllUsers = () => {
               </thead>
               <tbody>
                 {currentUsers.map(user => (
-                  <tr key={user.id} className='hover:bg-gray-50'>
+                  <tr key={user._id} className='hover:bg-gray-50'>
                     <td className='py-2 px-4 border border-gray-300'>{user.name}</td>
                     <td className='py-2 px-4 border border-gray-300'>{user.email}</td>
-                    <td className='py-2 px-4 border border-gray-300'>delete or view</td> {/* Add clickable icons for delete or view */}
+                    <td className='py-2 px-4 border border-gray-300'>
+                      <div className='flex justify-center items-center space-x-5'>
+                        <button onClick={() => handleUpdate(user)} className='text-blue-500 mx-2'>
+                          <i className='fas fa-edit'></i>
+                        </button>
+                        <button onClick={() => handleDelete(user)} className='text-red-500 mx-2'>
+                          <i className='fas fa-trash'></i>
+                        </button>
+                      </div>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -139,6 +216,23 @@ export const AllUsers = () => {
           </div>
         </div>
       </main>
+
+      {/* Update User Modal */}
+      <Modal
+        isOpen={isUpdateModalOpen}
+        onRequestClose={() => setIsUpdateModalOpen(false)}
+        contentLabel="Update User"
+        className="modal"
+        overlayClassName="modal-overlay"
+      >
+        {selectedUser && (
+          <UpdateUser
+            user={selectedUser}
+            onUpdateUser={handleUpdateUser}
+            onClose={() => setIsUpdateModalOpen(false)}
+          />
+        )}
+      </Modal>
     </div>
   );
 };
