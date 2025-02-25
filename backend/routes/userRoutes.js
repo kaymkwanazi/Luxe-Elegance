@@ -1,6 +1,6 @@
 import express from 'express';
-import { authUser,  registerUser, logoutUser,getUserProfile, updateUserProfile, getUsers } from '../controllers/userController.js';
-import { protect } from '../middleware/authMiddleware.js';
+import { authUser,  registerUser, logoutUser,getUserProfile, updateUser, getUsers, deleteUser } from '../controllers/userController.js';
+import { admin, protect } from '../middleware/authMiddleware.js';
 import User from '../models/userModel.js';
 
 
@@ -28,6 +28,7 @@ router.post('/register', async (req, res) => {
 router.post('/auth', authUser);
 router.get('/', protect, getUsers);
 router.post('/logout', logoutUser);
-router.route('/profile').get(protect, getUserProfile).put(protect, updateUserProfile);
+router.route('/profile').get(protect, getUserProfile).put(protect, updateUser).delete(protect, admin, deleteUser);
+router.route('/:id').delete(protect, admin, deleteUser).put(protect,admin, updateUser);
 
 export default router;
