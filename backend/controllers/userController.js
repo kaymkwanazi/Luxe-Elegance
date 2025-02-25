@@ -102,10 +102,9 @@ const getUserProfile = asyncHandler(async (req, res) => {
 //ROUTE - PUT /api/users/:id
 //@access private
 const updateUser = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
+  const user = await User.findById(req.params.id);
 
   if (user) {
-     // Check if the new email already exists in the database
     if (req.body.email && req.body.email !== user.email) {
       const emailExists = await User.findOne({ email: req.body.email });
       if (emailExists) {
@@ -116,8 +115,7 @@ const updateUser = asyncHandler(async (req, res) => {
 
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
-    // Add other fields to update as needed
-
+    
     const updatedUser = await user.save();
 
     res.json({
@@ -140,9 +138,11 @@ const updateUserToAdmin = asyncHandler(async (req, res) => {
   const user =  await User.findById(req.params.id);
 
   if (user) {
+    console.log("🚀 ~ updateUserToAdmin ~ user:", user)
     user.isAdmin = true;
 
     const updatedUser = await user.save();
+    console.log("🚀 ~ updateUserToAdmin ~ updatedUser:", updatedUser)
 
     res.json({
       _id: updatedUser._id,

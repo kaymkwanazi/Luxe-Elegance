@@ -9,10 +9,6 @@ import connectDB from './config/db.js';
 
 dotenv.config();
 const port = process.env.PORT || 5000;
-
-console.log("🚀 ~ userRoutes:", userRoutes)
-
-
 connectDB();
 const app = express();
 

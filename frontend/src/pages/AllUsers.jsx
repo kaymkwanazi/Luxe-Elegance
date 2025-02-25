@@ -74,7 +74,6 @@ export const AllUsers = () => {
   };
 
   const handleDelete = (user) => {
-    console.log("🚀 ~ handleDelete ~ user:", user)
     Swal.fire({
       title: 'Are you sure?',
       text: `You are about to delete ${user.name}`,
