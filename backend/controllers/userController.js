@@ -163,19 +163,17 @@ const updateUserToAdmin = asyncHandler(async (req, res) => {
 const deleteUser = asyncHandler(async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    console.log("🚀 ~ deleteUser ~ user:", user);
     if (user) {
-      await user.remove();
+      await user.deleteOne();
       res.json({ message: 'User removed' });
-    }
-    else {
+    } else {
       res.status(404);
       throw new Error('User not found');
     }
   } catch (error) {
     console.error('Error deleting user:', error.message);
     res.status(500).json({ success: false, message: 'Server error', error: error.message });
-  } 
+  }
 });
 
 export { authUser, registerUser,logoutUser, getUserProfile, updateUser, updateUserToAdmin, getUsers, deleteUser };

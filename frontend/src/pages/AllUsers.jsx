@@ -74,6 +74,7 @@ export const AllUsers = () => {
   };
 
   const handleDelete = (user) => {
+    console.log("🚀 ~ handleDelete ~ user:", user)
     Swal.fire({
       title: 'Are you sure?',
       text: `You are about to delete ${user.name}`,
@@ -93,7 +94,9 @@ export const AllUsers = () => {
         })
         .then(response => {
           if (!response.ok) {
-            throw new Error('Network response was not ok');
+            return response.json().then(error => {
+              throw new Error(error.message || 'Network response was not ok');
+            });
           }
           return response.json();
         })
