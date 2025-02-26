@@ -3,17 +3,18 @@ import { AdminNavbar } from '../components/AdminNavbar';
 import General from '../components/General';
 import { Sidebar } from '../components/Sidebar';
 import { Link } from 'react-router-dom';
+import ToggleMode from '../components/ToggleMode';
 
 
-export const Settings = () => {
+export const Settings = ({ theme, setTheme }) => {
   const [showGeneral, setShowGeneral] = useState(true);
   const [showNotifications, setShowNotifications] = useState(true);
   const [selectedItem, setSelectedItem] = useState('general');
 
   return (
-    <div className="min-h-screen flex bg-white dark:bg-gray-900 text-black dark:text-white">
+    <div className="min-h-screen flex dark:bg-gray-900 text-black dark:text-white">
       <Sidebar />
-      <main className='flex-1 bg-[#EEDAEA]'>
+      <main className={`flex-1 border-t-2 ${theme === 'dark' ? 'bg-[#494949]' : 'bg-[#EEDAEA]'}`}>
         <AdminNavbar />
         <div className='container mx-auto px-10 py-10'>
           <h1 className="text-4xl mb-5">Settings</h1>
@@ -52,7 +53,11 @@ export const Settings = () => {
             </div>
             <div className='w-3/4 pl-4 border-l-2 border-l-gray-500'>
               {showGeneral && <General />}
-              {showNotifications && <h1>Notifications Settings</h1>} 
+              <div className='flex ml-5'>
+                <span>Theme:</span>
+                <span className='pl-10'><ToggleMode theme={theme} setTheme={setTheme} /></span>
+              </div>
+              {showNotifications} 
             </div>
           </div>
         </div>

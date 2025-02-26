@@ -8,14 +8,14 @@ import { UsersAndProducts } from '../components/UsersAndProducts';
 import { Sidebar } from '../components/Sidebar';
 import { AdminNavbar } from '../components/AdminNavbar';
 
-export const AdminDashboard = () => {
+export const AdminDashboard = (theme) => {
   return (
     <>
     <div className='flex h-screen'>
         {/* Side bar */}
         <Sidebar />
         {/* Main content */}
-        <main className='flex-1 bg-[#EEDAEA] border-t-2'>
+        <main className={`flex-1 border-t-2 ${theme === 'dark' ? 'bg-[#494949]' : 'bg-[#EEDAEA]'}`}>
             {/* header */}
             <AdminNavbar />
 

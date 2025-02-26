@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { MdAccountCircle, MdDelete, MdUpload } from 'react-icons/md';
 import ToggleMode from './ToggleMode'; // Assuming ToggleMode is a component in the same directory
 
-const GeneralDetails = () => {
+const GeneralDetails = (theme, setTheme) => {
   const [adminInfo, setAdminInfo] = useState({
     name: '',
     email: ''
@@ -69,10 +69,7 @@ fetchAdminDetails();
                 <span>Email:</span>
                 <span className='pl-10'>{adminInfo.email}</span>                           
               </div>
-              <div className='flex '>
-                <span>Theme:</span>
-                <span className='pl-10'><ToggleMode /></span>
-              </div>
+              
             </div>                 
           </div>
         </div>

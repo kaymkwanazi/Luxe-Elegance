@@ -9,7 +9,7 @@ import UpdateUser from '../components/UpdateUser';
 
 Modal.setAppElement('#root');
 
-export const AllUsers = () => {
+export const AllUsers = ({ theme }) => {
   const [allUsers, setAllUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
@@ -139,7 +139,7 @@ export const AllUsers = () => {
   return (
     <div className='flex h-screen'>
       <Sidebar />
-      <main className='flex-1 bg-[#EEDAEA]'>
+      <main className={`flex-1 border-t-2 ${theme === 'dark' ? 'bg-[#494949]' : 'bg-[#EEDAEA]'}`}>
         {/* Header */}
         <AdminNavbar />
         {/* Users list */}

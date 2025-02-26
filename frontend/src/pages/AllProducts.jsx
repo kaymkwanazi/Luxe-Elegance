@@ -9,7 +9,7 @@ import AddProduct from '../components/addProduct';
 import Swal from 'sweetalert2';
 import UpdateProduct from '../components/UpdateProduct';
 
-const AllProducts = () => {
+const AllProducts = ({ theme }) => {
   const [products, setProducts] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [multipleSelected, setMultipleSelected] = useState(false);
@@ -132,7 +132,7 @@ const AllProducts = () => {
       {/* Sidebar */}
       <Sidebar />
       {/* Main content */}
-      <main className='flex-1 bg-[#EEDAEA]'>
+      <main className={`flex-1 border-t-2 ${theme === 'dark' ? 'bg-[#494949]' : 'bg-[#EEDAEA]'}`}>
         {/* Header */}
         <AdminNavbar />
         {/* Products list */}
@@ -149,51 +149,48 @@ const AllProducts = () => {
             </div>
              
           </div>
-          <div>
-          <table className='min-w-full bg-white border border-gray-300 rounded-lg'>
-              <thead className='bg-slate-200'>
-                <tr>
-                  <th className='py-2 px-4 border border-gray-300'>Select</th>
-                  <th className='py-2 px-4 border border-gray-300'>Product Name</th>
-                  <th className='py-2 px-4 border border-gray-300'>Description</th>
-                  <th className='py-2 px-4 border border-gray-300'>Category</th>
-                  <th className='py-2 px-4 border-b border border-gray-300'>Price</th>
-                  <th className='py-2 px-4 border-b border border-gray-300'>Action</th>
-                  
-                </tr>
-              </thead>
-              <tbody>
-                {currentItems.map(product => (
-                  <tr key={product._id}>
-                    <td className='py-2 px-4 border border-gray-300'>
-                      <div className='flex justify-center items-center'>
-                        <input
-                          type='checkbox'
-                          onChange={() => handleCheckboxChange(product._id)}
-                        />
-                      </div>
-                    </td>
-                    <td className='py-2 px-4 border border-gray-300'>{product.name}</td>
-                    <td className='py-2 px-4 border border-gray-300'>{product.description}</td>
-                    <td className='py-2 px-4 border border-gray-300'>{product.category}</td>
-                    <td className='py-2 px-4 border border-gray-300'>R{product.price}</td>
-                    <td className='py-2 px-4 border-b border-r border border-gray-300'>
-                      <div className='flex justify-center items-center'>
-                        <button onClick={() => handleUpdate(product)} className='text-blue-500 mx-2'>
-                          <i className='fas fa-edit'></i>
-                        </button>
-                        <button onClick={() => handleDelete(product)} className='text-red-500 mx-2'>
-                          <i className='fas fa-trash'></i>
-                        </button>
-                      </div>
-                    </td>  
-                  </tr>
-                ))}
-              </tbody>
-
-            </table>
-
-          </div>
+          <div className='overflow-x-auto'>
+  <table className='min-w-full bg-white border border-gray-300 rounded-lg table-fixed'>
+    <thead className='bg-slate-200'>
+      <tr>
+        <th className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>Select</th>
+        <th className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>Product Name</th>
+        <th className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>Description</th>
+        <th className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>Category</th>
+        <th className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>Price</th>
+        <th className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {currentItems.map(product => (
+        <tr key={product._id}>
+          <td className='py-2 px-4 border border-gray-300'>
+            <div className='flex justify-center items-center'>
+              <input
+                type='checkbox'
+                onChange={() => handleCheckboxChange(product._id)}
+              />
+            </div>
+          </td>
+          <td className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>{product.name}</td>
+          <td className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>{product.description}</td>
+          <td className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>{product.category}</td>
+          <td className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>R{product.price}</td>
+          <td className='py-2 px-2 border border-gray-300'>
+            <div className='flex justify-center items-center space-x-2 sm:space-x-'>
+              <button onClick={() => handleUpdate(product)} className='text-blue-500 mx-1 sm:mx-2'>
+                <i className='fas fa-edit'></i>
+              </button>
+              <button onClick={() => handleDelete(product)} className='text-red-500 mx-1 sm:mx-2'>
+                <i className='fas fa-trash'></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
             <div className='flex justify-center pt-3'>
               {pageNumbers.map(number => (
                 <button key={number} onClick={() => handlePageChange(number)}

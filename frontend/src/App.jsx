@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -27,6 +26,7 @@ const App = () => {
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
   const [products, setProducts] = useState([]);
   const [initialCart, setInitialCart] = useState([]);
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   const location = useLocation();
   const shouldShowNavbarAndFooter = !['/dashboard', '/Settings', '/allProducts', '/allUsers', '/profile', '/notifications'].includes(location.pathname) && !modalIsOpen;
@@ -46,6 +46,15 @@ const App = () => {
     };
     fetchProducts();
   }, []);
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   const handleSignInClick = () => {
     setModalIsOpen(true);
@@ -102,7 +111,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className={`min-h-screen transition-colors ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
       {shouldShowNavbarAndFooter && (<Navbar 
         isAuthenticated={isAuthenticated}
         user={user}
@@ -120,9 +129,9 @@ const App = () => {
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />
-        <Route path='dashboard' element={<AdminDashboard />} />
+        <Route path='dashboard' element={<AdminDashboard theme={theme} />} />
         <Route path='/profile' element={<Profile user={user} />} />
-        <Route path='/settings' element={<Settings />} />
+        <Route path='/settings' element={<Settings theme={theme} setTheme={setTheme} />} />
         <Route path='/logout' element={<Logout onSignOut={handleSignOut} />} />
         <Route path='/products' element={<Products products={products} isAdmin={user?.isAdmin} isAuthenticated={isAuthenticated} addToCart={addToCart}/>} />
         <Route path='/addProduct' element={<AddProduct newAddProduct={newAddProduct} />} />
@@ -131,7 +140,9 @@ const App = () => {
         <Route path='/AllUsers' element={<AllUsers />} />
         <Route path='/products/:id' element={<ViewProduct isAuthenticated={isAuthenticated} addToCart={addToCart}/>} />
         
+        
     </Routes>
+  
     {shouldShowNavbarAndFooter && <Footer />}
     <Modal isOpen={isAddProductModalOpen} onClose={handleCloseAddProductModal}>
         <AddProduct newAddProduct={newAddProduct} onClose={handleCloseAddProductModal} />

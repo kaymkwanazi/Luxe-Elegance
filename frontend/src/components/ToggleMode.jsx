@@ -1,17 +1,6 @@
-import { useEffect, useState } from "react";
+import React from 'react';
 
-export default function ThemeToggle() {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-
-  useEffect(() => {
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-    localStorage.setItem("theme", theme);
-  }, [theme]);
-
+export default function ThemeToggle({ theme, setTheme }) {
   return (
     <label className="relative inline-flex items-center cursor-pointer">
       <input

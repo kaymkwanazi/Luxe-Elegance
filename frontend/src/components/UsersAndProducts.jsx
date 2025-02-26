@@ -46,11 +46,11 @@ export const UsersAndProducts = () => {
     <>
     <div className='flex items-center justify-center gap-x-10 text-center font-semibold text-2xl'>
         <div className='bg-white w-1/2 rounded-md shadow-md p-5 m-5'>
-            <h1 className='mb-5'>Total Users</h1>
+            <h1 className='mb-5 text-lg'>Total Users</h1>
             <p>{users.length}</p>
         </div>
         <div className='bg-white w-1/2 rounded-md shadow-md p-5 m-5'>
-            <h1 className='mb-5'>Total Products</h1>
+            <h1 className='mb-5 text-lg'>Total Products</h1>
             <p>{products.length}</p>
         </div>
     </div>
