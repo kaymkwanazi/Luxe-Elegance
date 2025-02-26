@@ -11,14 +11,13 @@ import UpdateProduct from '../components/UpdateProduct';
 
 const AllProducts = ({ theme }) => {
   const [products, setProducts] = useState([]);
-  const [selectedProducts, setSelectedProducts] = useState([]);
-  const [multipleSelected, setMultipleSelected] = useState(false);
-  const navigate = useNavigate();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
 
   const lastItem = currentPage * itemsPerPage;
   const firstItem = lastItem - itemsPerPage;
@@ -53,6 +52,34 @@ const AllProducts = ({ theme }) => {
       return newSelected;
     });
   };
+
+  const filteredProducts = products.filter(product =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    product.email.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+    // Sort users based on sort configuration
+    const sortedProducts = [...filteredProducts].sort((a, b) => {
+      if (sortConfig.key) {
+        const direction = sortConfig.direction === 'asc' ? 1 : -1;
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return -1 * direction;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return 1 * direction;
+        }
+        return 0;
+      }
+      return 0;
+    });
+
+    const handleSort = (key) => {
+      let direction = 'asc';
+      if (sortConfig.key === key && sortConfig.direction === 'asc') {
+        direction = 'desc';
+      }
+      setSortConfig({ key, direction });
+    };
 
   const handleAddProduct = (product) => {
     setIsAddModalOpen(true);
@@ -136,7 +163,7 @@ const AllProducts = ({ theme }) => {
         {/* Header */}
         <AdminNavbar />
         {/* Products list */}
-        <div className='container mx-auto px-10 py-5'>
+        <div className='container mx-auto px-10'>
           <div className='flex justify-between'>
             <h1 className='text-4xl mb-10'>Product Inventory</h1>
             <div>
@@ -149,49 +176,74 @@ const AllProducts = ({ theme }) => {
             </div>
              
           </div>
+          <div className='mb-4'>
+            <input
+              type='text'
+              placeholder='Search by name'
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className='px-4 py-2 border border-gray-300 rounded-md'
+            />
+            <button 
+              onClick={() => setSearchTerm('')}
+              className='ml-2 px-4 py-2 border border-black hover:bg-slate-300'>
+                Search
+            </button>
+          </div>
           <div className='overflow-x-auto'>
-  <table className='min-w-full bg-white border border-gray-300 rounded-lg table-fixed'>
-    <thead className='bg-slate-200'>
-      <tr>
-        <th className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>Select</th>
-        <th className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>Product Name</th>
-        <th className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>Description</th>
-        <th className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>Category</th>
-        <th className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>Price</th>
-        <th className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      {currentItems.map(product => (
-        <tr key={product._id}>
-          <td className='py-2 px-4 border border-gray-300'>
-            <div className='flex justify-center items-center'>
-              <input
-                type='checkbox'
-                onChange={() => handleCheckboxChange(product._id)}
-              />
-            </div>
-          </td>
-          <td className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>{product.name}</td>
-          <td className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>{product.description}</td>
-          <td className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>{product.category}</td>
-          <td className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>R{product.price}</td>
-          <td className='py-2 px-2 border border-gray-300'>
-            <div className='flex justify-center items-center space-x-2 sm:space-x-'>
-              <button onClick={() => handleUpdate(product)} className='text-blue-500 mx-1 sm:mx-2'>
-                <i className='fas fa-edit'></i>
-              </button>
-              <button onClick={() => handleDelete(product)} className='text-red-500 mx-1 sm:mx-2'>
-                <i className='fas fa-trash'></i>
-              </button>
-            </div>
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
-            <div className='flex justify-center pt-3'>
+            <table className='min-w-full bg-white border border-gray-300 rounded-lg table-auto'>
+              <thead className='bg-slate-200'>
+                <tr>
+                  <th className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>Select</th>
+                  <th className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap cursor-pointer'
+                    onClick={() => handleSort('name')}>
+                    Product Name {sortConfig.key === 'name' && (sortConfig.direction === 'asc' ? '▲' : '▼')}
+                  </th>
+                  <th className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap cursor-pointer'
+                    onClick={() => handleSort('description')}>
+                    Description {sortConfig.key === 'description' && (sortConfig.direction === 'asc' ? '▲' : '▼')}
+                  </th>
+                  <th className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>Category</th>
+                  <th className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>Price</th>
+                  <th className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentItems.map(product => (
+                  <tr key={product._id}>
+                    <td className='py-2 px-4 border border-gray-300'>
+                      <div className='flex justify-center items-center'>
+                        <input
+                          type='checkbox'
+                          onChange={() => handleCheckboxChange(product._id)}
+                        />
+                      </div>
+                    </td>
+                    <td className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>{product.name}</td>
+                    <td className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>
+                      <div className='flex items-center'>
+                        <img src={product.image} alt={product.name} className='w-10 h-10 object-cover mr-2' />
+                        <span>{product.description}</span>
+                      </div>
+                    </td>
+                    <td className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>{product.category}</td>
+                    <td className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>R{product.price}</td>
+                    <td className='py-2 px-2 border border-gray-300'>
+                      <div className='flex justify-center items-center space-x-2 sm:space-x-'>
+                        <button onClick={() => handleUpdate(product)} className='text-blue-500 mx-1 sm:mx-2'>
+                          <i className='fas fa-edit'></i>
+                        </button>
+                        <button onClick={() => handleDelete(product)} className='text-red-500 mx-1 sm:mx-2'>
+                          <i className='fas fa-trash'></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+            <div className='flex justify-center items-center space-x-2 mt-5'>
               {pageNumbers.map(number => (
                 <button key={number} onClick={() => handlePageChange(number)}
                 className='py-2 px-3 leading-tight border border-gray-300 bg-white hover:bg-gray-100 hover:text-gray-700'>

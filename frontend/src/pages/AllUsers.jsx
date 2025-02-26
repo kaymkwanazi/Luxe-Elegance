@@ -167,7 +167,7 @@ export const AllUsers = ({ theme }) => {
                   <th
                     className='py-2 px-4 border border-gray-300 cursor-pointer'
                     onClick={() => handleSort('name')}
-                  >
+                  > 
                     Name {sortConfig.key === 'name' && (sortConfig.direction === 'asc' ? '▲' : '▼')}
                   </th>
                   <th

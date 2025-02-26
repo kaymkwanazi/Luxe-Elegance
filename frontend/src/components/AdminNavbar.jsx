@@ -39,13 +39,12 @@ export const AdminNavbar = () => {
 
   return (
     <header>
-        <div className='container mx-auto px-16 py-5 flex justify-between items-center mb-6'>
+        <div className='container mx-auto px-4 py-5 flex justify-between items-center'>
                 <h1 className=' text-2xl font-semibold'>Welcome {admin ? admin.name: 'User'}!</h1>
                 <div className="flex items-center justify-between space-x-4">
                     <button>
                         <IoMdNotifications size={24} className='text-gray-500'/>
                     </button>
-                    {/* <input type='text' placeholder='Search' className='border-2 border-gray-300 rounded-xl px-4 text-sm py-1'/> */}
                     <button>
                         <Link to='/profile'>
                             <MdAccountCircle size={28} className='text-gray-500'/>
