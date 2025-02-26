@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import swal from 'sweetalert'
-import { useNavigate, NavLink } from 'react-router-dom';
+import { useNavigate, NavLink, Link } from 'react-router-dom';
 import logo from '../images/logo-luxe.webp'
 
 export const Sidebar = () => {
@@ -39,7 +39,9 @@ export const Sidebar = () => {
   return (
         <aside className='w-1/5 py-5 bg-[#494949] text-white flex flex-col items-center border-r-2 border-r-yellow-500'>
             <div className='flex items-center justify-center'>
-                <img src={logo} alt='logo' className='rounded-full' width={52}/>
+                <Link to='/dashboard' className='text-2xl font-semibold'>
+                    <img src={logo} alt='logo' className='rounded-full' width={52}/>
+                </Link>
             </div>
             <nav className='text-white flex-grow flex flex-col items-center py-28 space-y-5'>
             <NavLink
