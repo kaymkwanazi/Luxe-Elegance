@@ -155,7 +155,7 @@ export const AllUsers = ({ theme }) => {
             />
             <button
               onClick={() => setSearchTerm('')}
-              className='ml-2 px-4 py-2 border border-black hover:bg-slate-300'
+              className='ml-2 px-4 py-1 border border-black hover:bg-slate-300'
             >
               Clear
             </button>

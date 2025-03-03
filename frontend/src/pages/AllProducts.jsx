@@ -17,16 +17,9 @@ const AllProducts = ({ theme }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
   const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
 
-  const lastItem = currentPage * itemsPerPage;
-  const firstItem = lastItem - itemsPerPage;
-  const currentItems = products.slice(firstItem, lastItem);
-
-  const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(products.length / itemsPerPage); i++) {
-    pageNumbers.push(i);
-  }
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -53,45 +46,59 @@ const AllProducts = ({ theme }) => {
     });
   };
 
-  const filteredProducts = products.filter(product =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    product.email.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+  };
 
-    // Sort users based on sort configuration
-    const sortedProducts = [...filteredProducts].sort((a, b) => {
-      if (sortConfig.key) {
-        const direction = sortConfig.direction === 'asc' ? 1 : -1;
-        if (a[sortConfig.key] < b[sortConfig.key]) {
-          return -1 * direction;
-        }
-        if (a[sortConfig.key] > b[sortConfig.key]) {
-          return 1 * direction;
-        }
-        return 0;
+  const filteredProducts = products.filter(product => {
+    const matchesSearchTerm = product.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
+    return matchesSearchTerm && matchesCategory;
+  });
+
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    if (sortConfig.key) {
+      const direction = sortConfig.direction === 'asc' ? 1 : -1;
+      if (a[sortConfig.key] < b[sortConfig.key]) {
+        return -1 * direction;
+      }
+      if (a[sortConfig.key] > b[sortConfig.key]) {
+        return 1 * direction;
       }
       return 0;
-    });
+    }
+    return 0;
+  });
 
-    const handleSort = (key) => {
-      let direction = 'asc';
-      if (sortConfig.key === key && sortConfig.direction === 'asc') {
-        direction = 'desc';
-      }
-      setSortConfig({ key, direction });
-    };
+  const lastItem = currentPage * itemsPerPage;
+  const firstItem = lastItem - itemsPerPage;
+  const currentItems = sortedProducts.slice(firstItem, lastItem);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(sortedProducts.length / itemsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
+  const handleSort = (key) => {
+    let direction = 'asc';
+    if (sortConfig.key === key && sortConfig.direction === 'asc') {
+      direction = 'desc';
+    }
+    setSortConfig({ key, direction });
+  };
 
   const handleAddProduct = (product) => {
     setIsAddModalOpen(true);
     setIsUpdateModalOpen(false);
   };
+
   const newAddProduct = (product) => {
     setProducts((prevProducts) => [...prevProducts, product]);
   };
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
-  }
+  };
 
   const handleDelete = (product) => {
     Swal.fire({
@@ -149,10 +156,13 @@ const AllProducts = ({ theme }) => {
     setIsUpdateModalOpen(true);
     setIsAddModalOpen(false);
   };
+
   const handleUpdateProduct = (updatedProduct) => {
     setProducts(products.map(p => p._id === updatedProduct._id ? updatedProduct : p));
     setIsUpdateModalOpen(false);
   };
+
+  const uniqueCategories = ['All', ...new Set(products.map(product => product.category))];
 
   return (
     <div className='flex h-screen'>
@@ -174,9 +184,8 @@ const AllProducts = ({ theme }) => {
                   Add Product
               </button>
             </div>
-             
           </div>
-          <div className='mb-4'>
+          <div className='flex mb-4'>
             <input
               type='text'
               placeholder='Search by name'
@@ -186,9 +195,18 @@ const AllProducts = ({ theme }) => {
             />
             <button 
               onClick={() => setSearchTerm('')}
-              className='ml-2 px-4 py-2 border border-black hover:bg-slate-300'>
-                Search
+              className='ml-2 px-4 py-1 border border-black hover:bg-slate-300'>
+                Clear
             </button>
+            <select
+              value={selectedCategory}
+              onChange={handleCategoryChange}
+              className='ml-4 px-4 py-2 border border-gray-300 rounded-md'
+            >
+              {uniqueCategories.map(category => (
+                <option key={category} value={category}>{category}</option>
+              ))}
+            </select>
           </div>
           <div className='overflow-x-auto'>
             <table className='min-w-full bg-white border border-gray-300 rounded-lg table-auto'>

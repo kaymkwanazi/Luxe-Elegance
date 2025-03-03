@@ -32,7 +32,7 @@ export const AdminDashboard = (theme) => {
               <div className='grid grid-cols-2 gap-10'>
                 {/* Bar graph */}
                 <div className='flex flex-col h-full'>
-                  <h1 className='text-center text-2xl'>Monthly Stats</h1>
+                  <h1 className='text-center text-2xl'>Monthly Sales</h1>
                   <div className='flex-1 h-96'>
                     <BarGraph />
                   </div>
