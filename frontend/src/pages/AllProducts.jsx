@@ -165,7 +165,7 @@ const AllProducts = ({ theme }) => {
   const uniqueCategories = ['All', ...new Set(products.map(product => product.category))];
 
   return (
-    <div className='flex h-screen'>
+    <div className='flex min-h-screen'>
       {/* Sidebar */}
       <Sidebar />
       {/* Main content */}
@@ -217,7 +217,7 @@ const AllProducts = ({ theme }) => {
                     onClick={() => handleSort('name')}>
                     Product Name {sortConfig.key === 'name' && (sortConfig.direction === 'asc' ? '▲' : '▼')}
                   </th>
-                  <th className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap cursor-pointer'
+                  <th className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-normal cursor-pointer'
                     onClick={() => handleSort('description')}>
                     Description {sortConfig.key === 'description' && (sortConfig.direction === 'asc' ? '▲' : '▼')}
                   </th>
@@ -238,7 +238,7 @@ const AllProducts = ({ theme }) => {
                       </div>
                     </td>
                     <td className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>{product.name}</td>
-                    <td className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-nowrap'>
+                    <td className='py-2 px-2 border border-gray-300 text-xs sm:text-sm md:text-base whitespace-normal'>
                       <div className='flex items-center'>
                         <img src={product.image} alt={product.name} className='w-10 h-10 object-cover mr-2' />
                         <span>{product.description}</span>
@@ -261,7 +261,7 @@ const AllProducts = ({ theme }) => {
               </tbody>
             </table>
           </div>
-            <div className='flex justify-center items-center space-x-2 mt-5'>
+            <div className='flex justify-center items-center space-x-2 my-5'>
               {pageNumbers.map(number => (
                 <button key={number} onClick={() => handlePageChange(number)}
                 className='py-2 px-3 leading-tight border border-gray-300 bg-white hover:bg-gray-100 hover:text-gray-700'>
