@@ -41,18 +41,19 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
   }
 
   return (
-    <nav className="p-4 border-b border-yellow-500 absolute top-0 left-0 w-full z-50
-    ">
+    <nav className="p-4 border-b border-yellow-500 absolute top-0 left-0 w-full z-50">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center">
-          <Link to="/" className="text-white px-3 py-2 pl-10 rounded-md text-sm font-medium italic"><img src={logo} width={50} className='rounded-full'></img></Link>
+          <Link to="/" className="text-white px-3 py-2 pl-10 rounded-md text-sm font-medium italic">
+            <img src={logo} width={50} className='rounded-full' alt="Logo" />
+          </Link>
         </div>
         <div className="block lg:hidden">
           <button
             onClick={toggleMenu}
-            className="flex items-center px-3 py-2 border rounded"
+            className="flex items-center focus:outline-none px-3 py-2"
           >
-            {isOpen ? <FaTimes className="text-white" /> : <FaBars className="text-white" />}
+            {isOpen ? <FaTimes className="text-white absolute top-9 right-96" /> : <FaBars className="text-white" />}
           </button>
         </div>
         <div className={`w-full block flex-grow lg:flex lg:items-center lg:w-auto ${isOpen ? '' : 'hidden'}`}>
@@ -75,7 +76,7 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
                 <li className="relative block mt-4 lg:mt-0 text-white hover:font-bold">
                   <button
                     onClick={togglePopUp}
-                    className="flex items-center px-3 py-2 rounded-md focus:outline-none "
+                    className="flex items-center px-3 py-2 rounded-md focus:outline-none"
                   >
                     <MdAccountCircle size={32} />
                   </button>
@@ -126,6 +127,5 @@ const Navbar = ({ isAuthenticated, user, onSignInClick, isPopUpVisible, handleIt
     </nav>
   );
 };
-
 
 export default Navbar;

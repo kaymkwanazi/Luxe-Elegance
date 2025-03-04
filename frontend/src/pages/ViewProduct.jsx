@@ -109,14 +109,14 @@ export const ViewProduct = ({ isAuthenticated, addToCart }) => {
                     </div>
                 </div>
 
-                <div className='container mx-auto px-16 pt-16'>
-                    <h1 className='text-2xl md:text-4xl'>You may also like</h1>
+                <div className='container mx-auto pt-16'>
+                    <h1 className='text-4xl'>You may also like</h1>
                     <p className='py-5 text-lg'>Make every day special with high quality jewellery</p>
                     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 pt-5'>
                     {relatedProducts.length > 0 ? (
                         relatedProducts.map((relatedProduct, index) => (
                         <div key={index} className='border border-white text-white p-5 rounded-lg h-full'>
-                            <img src={relatedProduct.image} alt={relatedProduct.name} className='object-cover w-full h-96 rounded-lg'/>
+                            <img src={relatedProduct.image} alt={relatedProduct.name} className='object-cover w-full md:h-96 rounded-lg'/>
                             <h2 className='text-xl mt-5'>{relatedProduct.name}</h2>
                             <p className='text-lg font-bold'>R{relatedProduct.price}</p>
                             <button

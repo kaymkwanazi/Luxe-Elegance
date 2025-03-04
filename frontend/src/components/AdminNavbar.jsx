@@ -44,7 +44,7 @@ export const AdminNavbar = () => {
                 <div className="flex items-center justify-between space-x-4">
                     <button>
                         <IoMdNotifications size={24} className='text-gray-500'/>
-                    </button>
+                    </button>   
                     <button>
                         <Link to='/profile'>
                             <MdAccountCircle size={28} className='text-gray-500'/>

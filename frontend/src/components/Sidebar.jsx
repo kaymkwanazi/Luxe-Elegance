@@ -87,7 +87,7 @@ export const Sidebar = () => {
             </nav>
             <div className='mt-auto py-10'>
                 <button className='px-5 py-2 border hover:bg-gray-700 text-sm mt-4 font-semibold'
-                onClick={handleLogout}>Logout</button>
+                onClick={handleLogout}>Sign out</button>
             </div>      
         </aside>
   )

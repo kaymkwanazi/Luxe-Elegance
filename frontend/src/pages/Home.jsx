@@ -42,22 +42,21 @@ const Home = () => {
       </div>
 
       {/* Mid shop section */}
-      <div className='bg-[#5c5c5c]  text-center pt-10 pb-16'>
-        <h1 className='text-6xl text-white font-carattere'>Shop by Category</h1>
-        <hr className='mx-auto my-4 w-16 border-t-2 border-[#FFD700] pb-10'></hr>
-        <div className='container mx-auto px-4 grid cols-1 md:grid-cols-4 gap-10'>
-          {categories.map((category, index) => (
-            <div key={index}  onClick={() => handleCategoryClick(category.name)} className='flex flex-col items-center bg-white text-black rounded-lg shadow-md overflow-hidden cursor-pointer '>
-                <img src={category.image} alt={category.name} className='w-full h-full object-cover transform transition duration-300 hover:scale-110'/>
-                <div className='p-4'>
-                  <h2 className='text-xl font-semibold'>{category.name}</h2>
-                  <p className='mt-2'>{category.description}</p>
-                </div>
-            </div>
-          ))}
-         </div>
-
+      <div className='bg-[#5c5c5c] text-center pt-10 pb-16'>
+  <h1 className='text-6xl text-white font-carattere'>Shop by Category</h1>
+  <hr className='mx-auto my-4 w-16 border-t-2 border-[#FFD700] pb-10'></hr>
+  <div className='container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10'>
+    {categories.map((category, index) => (
+      <div key={index} onClick={() => handleCategoryClick(category.name)} className='flex flex-col items-center bg-white text-black rounded-lg shadow-md overflow-hidden cursor-pointer'>
+        <img src={category.image} alt={category.name} className='w-full h-48 sm:h-64 md:h-80 object-cover transform transition duration-300 hover:scale-110'/>
+        <div className='p-4'>
+          <h2 className='text-xl font-semibold'>{category.name}</h2>
+          <p className='mt-2'>{category.description}</p>
+        </div>
       </div>
+    ))}
+  </div>
+</div>
 
       {/* Mid about Section */}
       <div className="relative bg-[#DBDBDB] text-center py-10">
