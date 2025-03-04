@@ -94,7 +94,7 @@ export const Products = ({ products: initialProducts,  addToCart, isAuthenticate
           <button
             key={number}
             onClick={() => setCurrentPage(number)}
-            className="mx-1 px-2 py-1 mb-5 rounded-lg text-white"
+            className="mx-1 px-2 py-1 mb-5 border border-white bg-white rounded-lg text-black"
           >
             {number}
           </button>

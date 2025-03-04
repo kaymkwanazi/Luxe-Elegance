@@ -4,11 +4,6 @@ import { Link } from 'react-router-dom';
 import { FaCopyright, FaFacebook, FaFacebookF, FaInstagram, FaInstagramSquare, FaLinkedin, FaLinkedinIn, FaPhone, FaPinterest, FaPinterestP, FaRegCopyright, FaWhatsapp, FaYoutube } from 'react-icons/fa';
 import logo from '../images/logo-luxe.webp'
 import { MdLocationPin, MdOutlineMail } from 'react-icons/md';
-import  facebook from '../images/facebook.png'
-import instagram from '../images/instagram.png'
-import twitter from '../images/twitter.png'
-import pinterest from '../images/pinterest.png'
-import youtube from '../images/youtube.png'
 import { IoIosArrowDropup } from 'react-icons/io';
 
 
@@ -26,11 +21,10 @@ const Footer = () => {
             <div className='flex flex-col gap-5'>
               <h2 className='text-white font-semibold text-xl text-center'>Follow us</h2>
                 <div className='flex  gap-5'>
-                  <img src={facebook} alt="Facebook" width={30} className='cursor-pointer'/>
-                  <img src={instagram} alt="Instagram" width={30} className='cursor-pointer'/>
-                  <img src={twitter} alt="Twitter" width={30} className='cursor-pointer'/>
-                  <img src={pinterest} alt="Pinterest" width={30} className='cursor-pointer'/>
-                
+                  <FaFacebook size={32} className='text-white'/>
+                  <FaInstagram size={32} className='text-white'/>
+                  <FaLinkedin size={32} className='text-white'/>
+                  <FaPinterest size={32} className='text-white'/>             
                 </div>
             </div>
           
